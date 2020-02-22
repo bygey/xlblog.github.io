@@ -54,7 +54,7 @@ var css = '<';
 <script type="text/javascript">
 window.onload=getCSS();
 </script>
-
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 
  	
 </head>
@@ -392,6 +392,13 @@ a.back_to_top:hover span {
     })(jQuery);
     jQuery.adamsOverload();
 </script>
-
+<div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: '<WREJSfNUsjqCmUHG190wjIbF-gzGzoHsz>',
+            appKey: '<Qo3w3jWesr1BXB4b0zMRJ9um>'
+        })
+    </script>
 </body>
 </html>
