@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xlblog.github.io</id>
     <title>XLBLOG</title>
-    <updated>2020-02-23T11:43:30.156Z</updated>
+    <updated>2020-02-24T06:13:15.238Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xlblog.github.io"/>
     <link rel="self" href="https://xlblog.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://xlblog.github.io/images/avatar.png</logo>
     <icon>https://xlblog.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, XLBLOG</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaScript_DOM编程艺术--第三章--DOM]]></title>
+        <id>https://xlblog.github.io/post/javascript_dom-bian-cheng-yi-zhu-di-san-zhang-dom/</id>
+        <link href="https://xlblog.github.io/post/javascript_dom-bian-cheng-yi-zhu-di-san-zhang-dom/">
+        </link>
+        <updated>2020-02-24T06:12:24.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[六级翻译第一篇]]></title>
         <id>https://xlblog.github.io/post/liu-ji-fan-yi-di-yi-pian/</id>

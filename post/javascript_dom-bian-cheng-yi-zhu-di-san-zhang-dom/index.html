@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+     <meta charset="utf-8" />
+  <title>JavaScript_DOM编程艺术--第三章--DOM | XLBLOG</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <link rel="stylesheet" href="https://xlblog.github.io/styles/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+   <script src="https://cdn.staticfile.org/highlight.js/9.15.9/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+ <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+ </head>
+ <body>
+     <div class="sidebar animated fadeInDown">
+   <div class="logo-title">
+    <div class="title">
+     <img src="https://xlblog.github.io/images/avatar.png?v=1582524791887" style="width:127px;" />
+
+     <h3 title=""><a href="/">xlvia</a></h3>
+
+     <div class="description">
+      <p>记录</p>
+     </div>
+    </div>
+   </div>
+   <ul class="social-links">
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+   </ul>
+   <div class="footer">
+    <div class="by_farbox">
+   
+    </div>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158922859-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158922859-1');
+</script>
+
+
+    </div>
+   </div>
+  </div>
+  <div class="main">
+     <div class="page-top animated fadeInDown">
+    <div class="nav">
+    
+     <li><a  href="/">首页</a></li>
+
+     <li><a  href="/archives">归档</a></li>
+
+     <li><a  href="/tags">标签</a></li>
+
+    </div>
+    <div class="information">
+     <div class="back_btn">
+      <li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li>
+     </div>
+    </div>
+   </div>
+   <div class="autopagerize_page_element">
+    <div class="content">
+     <div class="post-page">
+      <div class="post animated fadeInDown">
+       <div class="post-title">
+        <h3><a>JavaScript_DOM编程艺术--第三章--DOM</a></h3>
+       </div>
+       <div class="post-content">
+        <!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <title>JavaScript_DOM编程艺术--第三章--DOM</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            width: auto;
+            height: auto;
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            overflow-x: scroll;
+            min-width: 0px;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            overflow-y: scroll;
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #08a1ef;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+            #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+            #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+            #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="main-content">
+        <div id="svg-container"><svg xmlns="http://www.w3.org/2000/svg" ed:vSpacing="30" ed:name="Page-1" height="1147" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" width="1335" viewBox="0 0 1335 1147" id="page1" ed:hSpacing="30" xmlns:ed="https://www.edrawsoft.cn/xml/2017/SVGExtensions/" preserveAspectRadio="xMinYMin meet">
+    <style type="text/css"><![CDATA[
+g[ed\:togtopicid],g[ed\:hyperlink],g[ed\:comment],g[ed\:note] {cursor:pointer;}
+g[id] {-moz-user-select: none;-ms-user-select: none;user-select: none;}
+svg text::selection,svg tspan::selection{background-color: #4285f4;color: #ffffff;fill: #ffffff;}
+.st39 {fill:#454545;font-family:微软雅黑;font-size:10pt}
+.st38 {fill:#454545;font-family:微软雅黑;font-size:12pt}
+.st37 {fill:#454545;font-family:微软雅黑;font-size:14pt}
+.st50 {fill:#50fa7b;font-family:Consolas,Courier New,monospace}
+.st42 {fill:#50fa7b;font-family:宋体}
+.st47 {fill:#8be9fd;font-family:Consolas,Courier New,monospace;font-style:italic}
+.st45 {fill:#8be9fd;font-family:宋体;font-style:italic}
+.st46 {fill:#bd93f9;font-family:宋体}
+.st51 {fill:#f1fa8c;font-family:Consolas,Courier New,monospace}
+.st43 {fill:#f1fa8c;font-family:宋体}
+.st48 {fill:#f8f8f2;font-family:Consolas,Courier New,monospace}
+.st44 {fill:#f8f8f2;font-family:宋体}
+.st49 {fill:#ff79c6;font-family:Consolas,Courier New,monospace}
+.st41 {fill:#ff79c6;font-family:宋体}
+.st40 {fill:#ffffff;font-family:微软雅黑;font-size:11pt}
+]]></style>
+    <defs>
+        <linearGradient x2="0%" x1="0%" y1="0%" y2="100%" id="lg4">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="0.25" stop-color="#f0f5f0"/>
+            <stop offset="0.75" stop-color="#e1ebe1"/>
+            <stop offset="1" stop-color="#c8d7c8"/>
+        </linearGradient>
+    </defs>
+    <rect y="0" height="1147" width="1335" x="0" fill="#fbfcfb"/>
+    <g ed:toid="114" ed:type="relation" ed:fromid="116" id="137" transform="matrix(1,0,0,1,484,305)">
+        <path d="M229.7,-267.4C175.7,-269.1,-207.1,249.7,-229.7,267.3" fill="none"/>
+        <path d="M229.7,-267.4C177.7,-269.1,-178.3,210.9,-225.6,263.2" stroke="#a98ae7" stroke-linejoin="round" fill="none" stroke-linecap="round"/>
+        <path stroke-width="1" d="M-229.7,267.3L-222,265.3C-223.3,264.9,-224.5,264.2,-225.6,263.2C-226.6,262.2,-227.3,260.9,-227.6,259.6L-229.7,267.3" stroke="#a98ae7" fill="#a98ae7" stroke-linecap="round"/>
+    </g>
+    <g ed:toid="157" ed:type="relation" ed:fromid="199" id="200" transform="matrix(1,0,0,1,567,758)">
+        <path d="M67.7,-37.6C-43.5,-10.6,43.5,10.6,-67.7,37.6" fill="none"/>
+        <path d="M67.7,-37.6C-41.5,-11,40.5,9.8,-62.1,36.2" stroke="#a98ae7" stroke-linejoin="round" fill="none" stroke-linecap="round"/>
+        <path stroke-width="1" d="M-67.7,37.6L-60.1,39.8C-61,38.8,-61.7,37.6,-62.1,36.2C-62.4,34.8,-62.4,33.4,-62,32.1L-67.7,37.6" stroke="#a98ae7" fill="#a98ae7" stroke-linecap="round"/>
+    </g>
+    <g ed:toid="166" ed:type="relation" ed:fromid="201" id="202" transform="matrix(1,0,0,1,570,940)">
+        <path d="M92.7,11.9C24.4,12.5,-24.4,-12.5,-92.7,-11.9" fill="none"/>
+        <path d="M92.7,11.9C26.4,12.5,-21.6,-11.1,-86.9,-11.9" stroke="#a98ae7" stroke-linejoin="round" fill="none" stroke-linecap="round"/>
+        <path stroke-width="1" d="M-92.7,-11.9L-85.8,-7.9C-86.5,-9.1,-86.9,-10.5,-86.9,-11.9C-86.9,-13.4,-86.5,-14.8,-85.8,-15.9L-92.7,-11.9" stroke="#a98ae7" fill="#a98ae7" stroke-linecap="round"/>
+    </g>
+    <g ed:toid="168" ed:type="relation" ed:fromid="203" id="204" transform="matrix(1,0,0,1,487,1005)">
+        <path d="M55.1,32.9C3.2,-17.4,-3.2,17.4,-55.1,-32.9" fill="none"/>
+        <path d="M55.1,32.9C4.6,-16,-2.8,15.5,-50.8,-28.9" stroke="#a98ae7" stroke-linejoin="round" fill="none" stroke-linecap="round"/>
+        <path stroke-width="1" d="M-55.1,-32.9L-52.8,-25.3C-52.5,-26.6,-51.8,-27.9,-50.8,-28.9C-49.8,-30,-48.6,-30.7,-47.3,-31.1L-55.1,-32.9" stroke="#a98ae7" fill="#a98ae7" stroke-linecap="round"/>
+    </g>
+    <path ed:parentid="101" d="M-28.7,101.1C-29.3,102.8,-28.7,104.4,-27.4,104.8C-26.1,105.3,-24.6,104.6,-24,102.9C-23.2,100.7,-22.4,98.4,-21.7,96.2C-21,93.9,-20.4,91.6,-19.8,89.3C-19.2,87,-18.6,84.7,-18.1,82.4C-17.6,80.1,-17.2,77.8,-16.7,75.5C-16.3,73.2,-15.9,70.9,-15.5,68.6C-15.1,66.3,-14.7,63.9,-14.4,61.6C-14,59.3,-13.7,57,-13.4,54.7C-13.1,52.3,-12.8,50,-12.5,47.7C-12.2,45.4,-11.9,43,-11.7,40.7C-11.4,38.4,-11.1,36.1,-10.9,33.8C-10.6,31.4,-10.4,29.1,-10.1,26.8C-9.9,24.5,-9.6,22.1,-9.4,19.8C-9.1,17.5,-8.9,15.2,-8.7,12.9C-8.4,10.5,-8.2,8.2,-8,5.9C-7.7,3.6,-7.5,1.3,-7.2,-1.1C-7,-3.4,-6.7,-5.7,-6.5,-8C-6.2,-10.3,-5.9,-12.6,-5.7,-15C-5.4,-17.3,-5.1,-19.6,-4.8,-21.9C-4.5,-24.2,-4.2,-26.5,-3.9,-28.8C-3.6,-31.1,-3.3,-33.4,-2.9,-35.7C-2.6,-38,-2.3,-40.3,-1.9,-42.6C-1.5,-44.9,-1.1,-47.2,-0.7,-49.5C-0.3,-51.8,0.1,-54.1,0.6,-56.4C1.1,-58.6,1.5,-60.9,2.1,-63.2C2.6,-65.4,3.1,-67.7,3.7,-70C4.3,-72.2,4.9,-74.4,5.5,-76.7C6.2,-78.9,6.9,-81.1,7.6,-83.3C8.3,-85.5,9.1,-87.7,10,-89.8C10.8,-92,11.7,-94.1,12.7,-96.2C13.7,-98.3,14.7,-100.4,15.9,-102.4C17,-104.4,18.2,-106.4,19.5,-108.3C20.8,-110.2,22.2,-112,23.7,-113.7C25.2,-115.5,26.8,-117.1,28.5,-118.6C30.3,-120.2,32.1,-121.5,34,-122.8C36,-124,38.1,-125.1,40.2,-125.9C42.2,-126.8,44.3,-127.5,46.7,-128C49.1,-128.6,51.8,-128.9,53.6,-129.1C55.3,-129.2,56.1,-129.2,56.9,-129.2C57.2,-129.2,57.5,-129.4,57.5,-129.7C57.5,-130,57.2,-130.2,56.9,-130.2C56.1,-130.2,55.3,-130.2,53.5,-130.1C51.7,-130,48.9,-129.7,46.5,-129.2C44,-128.7,41.8,-128,39.7,-127.1C37.5,-126.2,35.4,-125.2,33.3,-123.9C31.3,-122.7,29.4,-121.3,27.6,-119.8C25.8,-118.2,24.1,-116.6,22.5,-114.8C20.9,-113,19.5,-111.2,18.1,-109.2C16.7,-107.3,15.5,-105.3,14.3,-103.3C13.1,-101.2,12,-99.1,11,-97C10,-94.9,9,-92.8,8.1,-90.6C7.2,-88.4,6.4,-86.2,5.6,-84C4.8,-81.8,4.1,-79.5,3.4,-77.3C2.7,-75.1,2,-72.8,1.4,-70.5C0.8,-68.3,0.2,-66,-0.3,-63.7C-0.9,-61.5,-1.4,-59.2,-1.9,-56.9C-2.4,-54.6,-2.9,-52.3,-3.3,-50C-3.8,-47.7,-4.2,-45.4,-4.6,-43.1C-5,-40.8,-5.4,-38.5,-5.8,-36.2C-6.2,-33.9,-6.5,-31.6,-6.9,-29.2C-7.2,-26.9,-7.6,-24.6,-7.9,-22.3C-8.2,-20,-8.5,-17.7,-8.8,-15.4C-9.1,-13,-9.4,-10.7,-9.7,-8.4C-10,-6.1,-10.3,-3.8,-10.6,-1.4C-10.9,0.9,-11.2,3.2,-11.4,5.5C-11.7,7.8,-12,10.1,-12.3,12.5C-12.5,14.8,-12.8,17.1,-13.1,19.4C-13.4,21.7,-13.6,24,-13.9,26.4C-14.2,28.7,-14.5,31,-14.8,33.3C-15.1,35.6,-15.4,37.9,-15.7,40.2C-16,42.5,-16.3,44.8,-16.6,47.1C-16.9,49.5,-17.3,51.8,-17.6,54.1C-17.9,56.4,-18.3,58.6,-18.7,60.9C-19.1,63.2,-19.5,65.5,-19.9,67.8C-20.3,70.1,-20.7,72.4,-21.2,74.6C-21.7,76.9,-22.2,79.1,-22.7,81.4C-23.2,83.6,-23.8,85.9,-24.4,88.1C-25,90.3,-25.7,92.5,-26.4,94.7C-27.1,96.9,-27.9,99,-28.7,101.1z" stroke="#ff7575" stroke-linejoin="round" id="103" ed:tosuperid="102" fill="#ff7575" transform="matrix(1,0,0,1,132,549)" stroke-linecap="round"/>
+    <path ed:parentid="101" d="M-25.1,55.6C-25.8,57.2,-25.4,58.8,-24.1,59.4C-22.9,60,-21.3,59.4,-20.6,57.8C-19.6,55.6,-18.6,53.4,-17.7,51.2C-16.8,49,-16,46.8,-15.2,44.5C-14.5,42.3,-13.7,40.1,-13,37.8C-12.3,35.6,-11.7,33.3,-11,31C-10.4,28.8,-9.8,26.5,-9.2,24.3C-8.6,22,-8,19.7,-7.4,17.5C-6.9,15.2,-6.3,12.9,-5.7,10.7C-5.2,8.4,-4.6,6.1,-4.1,3.9C-3.5,1.6,-3,-0.7,-2.4,-2.9C-1.8,-5.2,-1.2,-7.4,-0.7,-9.7C-0.1,-12,0.5,-14.2,1.1,-16.4C1.7,-18.7,2.4,-20.9,3,-23.1C3.7,-25.4,4.4,-27.6,5.1,-29.8C5.8,-32,6.6,-34.2,7.3,-36.4C8.1,-38.6,9,-40.7,9.8,-42.9C10.7,-45,11.6,-47.1,12.6,-49.2C13.6,-51.3,14.7,-53.3,15.8,-55.3C16.9,-57.4,18.1,-59.3,19.4,-61.2C20.7,-63.1,22.1,-65,23.6,-66.7C25.1,-68.4,26.7,-70.1,28.4,-71.6C30.1,-73.2,31.9,-74.6,33.9,-75.8C35.8,-77,37.9,-78.1,39.9,-79C42,-79.9,44.1,-80.6,46.5,-81.2C48.8,-81.7,51.5,-82.1,53.3,-82.3C55.1,-82.4,56,-82.4,56.9,-82.4C57.2,-82.4,57.5,-82.7,57.5,-82.9C57.5,-83.2,57.2,-83.4,56.9,-83.4C56,-83.5,55,-83.5,53.2,-83.4C51.4,-83.2,48.6,-82.9,46.2,-82.4C43.7,-81.9,41.6,-81.2,39.4,-80.3C37.2,-79.5,35.1,-78.4,33,-77.1C31,-75.9,29.1,-74.5,27.3,-72.9C25.5,-71.4,23.8,-69.7,22.2,-68C20.6,-66.2,19.1,-64.3,17.8,-62.4C16.4,-60.5,15.1,-58.5,13.9,-56.5C12.7,-54.4,11.6,-52.4,10.5,-50.3C9.4,-48.1,8.4,-46,7.5,-43.9C6.5,-41.7,5.7,-39.5,4.8,-37.3C4,-35.1,3.1,-32.9,2.4,-30.7C1.6,-28.5,0.9,-26.3,0.1,-24C-0.6,-21.8,-1.3,-19.6,-1.9,-17.3C-2.6,-15.1,-3.3,-12.8,-3.9,-10.6C-4.6,-8.3,-5.2,-6.1,-5.8,-3.8C-6.4,-1.6,-7,0.7,-7.6,2.9C-8.3,5.2,-8.9,7.4,-9.5,9.7C-10.1,11.9,-10.7,14.2,-11.3,16.4C-11.9,18.7,-12.6,20.9,-13.2,23.1C-13.9,25.4,-14.5,27.6,-15.2,29.8C-15.9,32,-16.6,34.2,-17.3,36.4C-18.1,38.6,-18.8,40.8,-19.6,43C-20.4,45.1,-21.3,47.3,-22.2,49.4C-23.1,51.5,-24.1,53.5,-25.1,55.6z" stroke="#5fb7f1" stroke-linejoin="round" id="105" ed:tosuperid="104" fill="#5fb7f1" transform="matrix(1,0,0,1,132,596)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="104" d="M-13.5,17.9C1.3,17.9,-4,-17.9,13.5,-17.9" stroke="#5fb7f1" stroke-linejoin="round" id="107" ed:tosuperid="106" fill="none" transform="matrix(1,0,0,1,270,495)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="104" d="M-13.5,2.3C-2.2,2.3,4.2,-2.3,13.5,-2.3" stroke="#5fb7f1" stroke-linejoin="round" id="111" ed:tosuperid="110" fill="none" transform="matrix(1,0,0,1,270,511)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="104" d="M-13.5,-13.4C0.4,-13.4,-1.8,13.4,13.5,13.4" stroke="#5fb7f1" stroke-linejoin="round" id="113" ed:tosuperid="112" fill="none" transform="matrix(1,0,0,1,270,526)" stroke-linecap="round"/>
+    <path ed:parentid="101" d="M-15.9,14.4C-17.2,15.7,-17.2,17.4,-16.2,18.3C-15.3,19.3,-13.6,19.3,-12.3,17.9C-10.7,16.2,-9.1,14.4,-7.6,12.6C-6.1,10.8,-4.6,9,-3.1,7.2C-1.6,5.4,-0.2,3.5,1.3,1.7C2.7,-0.1,4.2,-2,5.6,-3.8C7.1,-5.6,8.6,-7.4,10.1,-9.1C11.5,-10.9,13.1,-12.6,14.6,-14.3C16.2,-16,17.8,-17.7,19.5,-19.3C21.1,-20.8,22.9,-22.4,24.7,-23.8C26.5,-25.2,28.3,-26.5,30.3,-27.8C32.2,-29,34.2,-30.1,36.3,-31C38.4,-32,40.5,-32.8,42.7,-33.5C44.9,-34.2,47.1,-34.7,49.4,-35C51.8,-35.4,54.3,-35.5,56.9,-35.7C57.2,-35.7,57.5,-35.9,57.5,-36.2C57.5,-36.5,57.2,-36.7,56.9,-36.7C54.3,-36.6,51.7,-36.6,49.2,-36.3C46.8,-36.1,44.5,-35.7,42.3,-35.1C40,-34.5,37.7,-33.7,35.5,-32.8C33.3,-31.9,31.2,-30.9,29.1,-29.7C27,-28.5,25,-27.2,23.1,-25.8C21.2,-24.4,19.3,-22.9,17.6,-21.4C15.8,-19.8,14,-18.2,12.4,-16.5C10.7,-14.9,9,-13.2,7.5,-11.4C5.9,-9.7,4.3,-8,2.7,-6.2C1.2,-4.4,-0.3,-2.7,-1.9,-0.9C-3.4,0.9,-4.9,2.6,-6.4,4.4C-8,6.1,-9.5,7.8,-11.1,9.5C-12.7,11.2,-14.3,12.8,-15.9,14.4z" stroke="#ffcd55" stroke-linejoin="round" id="115" ed:tosuperid="114" fill="#ffcd55" transform="matrix(1,0,0,1,132,642)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="116" d="M56.4,-22.5L56.4,0.1L-50.4,0.1C-53.7,0.1,-56.4,2.8,-56.4,6.1L-56.4,22.5" stroke="#80cf70" stroke-linejoin="round" id="118" ed:tosuperid="117" fill="none" transform="matrix(1,0,0,1,694,80)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="116" d="M-31.3,0.1L25.3,0.1C28.6,0.1,31.3,2.8,31.3,6.1L31.3,22.5" stroke="#80cf70" stroke-linejoin="round" id="120" ed:tosuperid="119" fill="none" transform="matrix(1,0,0,1,781,80)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="117" d="M14.6,-22.5L14.6,0.1L-8.6,0.1C-11.9,0.1,-14.6,2.8,-14.6,6.1L-14.6,22.5" stroke="#80cf70" stroke-linejoin="round" id="122" ed:tosuperid="121" fill="none" transform="matrix(1,0,0,1,623,151)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="117" d="M-16.6,0.1L10.6,0.1C13.9,0.1,16.6,2.8,16.6,6.1L16.6,22.5" stroke="#80cf70" stroke-linejoin="round" id="124" ed:tosuperid="123" fill="none" transform="matrix(1,0,0,1,654,151)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="119" d="M43.5,-22.5L43.5,0.1L-37.5,0.1C-40.8,0.1,-43.5,2.8,-43.5,6.1L-43.5,22.5" stroke="#80cf70" stroke-linejoin="round" id="126" ed:tosuperid="125" fill="none" transform="matrix(1,0,0,1,769,151)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="119" d="M19.8,0.1L-13.8,0.1C-17.1,0.1,-19.8,2.8,-19.8,6.1L-19.8,22.5" stroke="#80cf70" stroke-linejoin="round" id="128" ed:tosuperid="127" fill="none" transform="matrix(1,0,0,1,793,151)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="119" d="M-23.8,0.1L17.8,0.1C21.1,0.1,23.8,2.8,23.8,6.1L23.8,22.5" stroke="#80cf70" stroke-linejoin="round" id="130" ed:tosuperid="129" fill="none" transform="matrix(1,0,0,1,836,151)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="129" d="M21.8,-22.5L21.8,0.1L-15.8,0.1C-19.1,0.1,-21.8,2.8,-21.8,6.1L-21.8,22.5" stroke="#80cf70" stroke-linejoin="round" id="132" ed:tosuperid="131" fill="none" transform="matrix(1,0,0,1,838,222)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="129" d="M0,0.1C0,0.1,0,2.8,0,6.1L0,22.5" stroke="#80cf70" stroke-linejoin="round" id="134" ed:tosuperid="133" fill="none" transform="matrix(1,0,0,1,860,222)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="129" d="M-21.8,0.1L15.8,0.1C19.1,0.1,21.8,2.8,21.8,6.1L21.8,22.5" stroke="#80cf70" stroke-linejoin="round" id="136" ed:tosuperid="135" fill="none" transform="matrix(1,0,0,1,882,222)" stroke-linecap="round"/>
+    <path ed:parentid="101" d="M-15.5,-28.1C-16.5,-29.6,-18.2,-29.8,-19.3,-29C-20.4,-28.2,-20.6,-26.6,-19.5,-25.1C-18.2,-23.3,-16.8,-21.4,-15.5,-19.5C-14.2,-17.6,-13,-15.7,-11.8,-13.7C-10.6,-11.7,-9.4,-9.8,-8.2,-7.8C-7,-5.8,-5.9,-3.7,-4.7,-1.7C-3.5,0.3,-2.4,2.3,-1.2,4.3C-0,6.4,1.2,8.4,2.4,10.4C3.6,12.4,4.8,14.4,6.1,16.4C7.4,18.4,8.7,20.3,10,22.3C11.4,24.2,12.8,26.1,14.3,27.9C15.8,29.8,17.3,31.6,18.9,33.3C20.6,35,22.3,36.7,24.1,38.2C25.9,39.8,27.8,41.2,29.8,42.5C31.8,43.8,33.9,45,36,45.9C38.2,46.9,40.5,47.8,42.7,48.4C45,49,47.3,49.5,49.7,49.8C52.1,50,54.5,50.1,56.9,50.1C57.2,50.1,57.5,49.9,57.5,49.6C57.5,49.4,57.2,49.1,56.9,49.1C54.5,49,52.2,48.9,49.9,48.5C47.6,48.2,45.3,47.7,43.2,47C41,46.3,38.8,45.4,36.8,44.4C34.8,43.3,32.8,42.2,30.9,40.8C29.1,39.5,27.3,38.1,25.6,36.5C23.9,35,22.3,33.3,20.8,31.6C19.3,29.9,17.8,28.1,16.5,26.3C15.1,24.4,13.8,22.5,12.5,20.6C11.2,18.6,10,16.7,8.9,14.7C7.7,12.7,6.5,10.7,5.4,8.7C4.3,6.6,3.2,4.6,2.1,2.5C1,0.5,-0.1,-1.6,-1.2,-3.7C-2.3,-5.7,-3.4,-7.8,-4.5,-9.8C-5.6,-11.9,-6.8,-14,-7.9,-16C-9.1,-18.1,-10.3,-20.1,-11.6,-22.1C-12.8,-24.1,-14.1,-26.1,-15.5,-28.1z" stroke="#f1a3dc" stroke-linejoin="round" id="139" ed:tosuperid="138" fill="#f1a3dc" transform="matrix(1,0,0,1,132,728)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="138" d="M-13.5,56.9C5.4,56.9,-13.5,-56.9,13.5,-56.9" stroke="#f1a3dc" stroke-linejoin="round" id="141" ed:tosuperid="140" fill="none" transform="matrix(1,0,0,1,270,721)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="138" d="M-13.5,41.3C4.9,41.3,-12.2,-41.3,13.5,-41.3" stroke="#f1a3dc" stroke-linejoin="round" id="143" ed:tosuperid="142" fill="none" transform="matrix(1,0,0,1,270,737)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="138" d="M-13.5,25.7C2.8,25.7,-7.4,-25.7,13.5,-25.7" stroke="#f1a3dc" stroke-linejoin="round" id="148" ed:tosuperid="147" fill="none" transform="matrix(1,0,0,1,270,752)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="138" d="M-13.5,2.3C-2.2,2.3,4.2,-2.3,13.5,-2.3" stroke="#f1a3dc" stroke-linejoin="round" id="150" ed:tosuperid="149" fill="none" transform="matrix(1,0,0,1,270,776)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="149" d="M-13.5,7.8C-0.9,7.8,1.1,-7.8,13.5,-7.8" stroke="#f1a3dc" stroke-linejoin="round" id="152" ed:tosuperid="151" fill="none" transform="matrix(1,0,0,1,340,766)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="149" d="M-13.5,-7.8C-0.9,-7.8,1.1,7.8,13.5,7.8" stroke="#f1a3dc" stroke-linejoin="round" id="154" ed:tosuperid="153" fill="none" transform="matrix(1,0,0,1,340,781)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="138" d="M-13.5,-36.8C4.4,-36.8,-11.2,36.8,13.5,36.8" stroke="#f1a3dc" stroke-linejoin="round" id="156" ed:tosuperid="155" fill="none" transform="matrix(1,0,0,1,270,815)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="155" d="M-13.5,0C-2.7,0,5.4,0,13.5,0" stroke="#f1a3dc" stroke-linejoin="round" id="161" ed:tosuperid="160" fill="none" transform="matrix(1,0,0,1,367,852)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="155" d="M-13.5,-15.6C0.9,-15.6,-2.9,15.6,13.5,15.6" stroke="#f1a3dc" stroke-linejoin="round" id="163" ed:tosuperid="162" fill="none" transform="matrix(1,0,0,1,367,867)" stroke-linecap="round"/>
+    <path ed:parentid="101" d="M-24.5,-114.1C-25.1,-115.8,-26.6,-116.5,-27.9,-116C-29.2,-115.5,-29.8,-114,-29.2,-112.3C-28.5,-110.2,-27.7,-108,-27,-105.8C-26.3,-103.7,-25.7,-101.4,-25.1,-99.2C-24.5,-97,-24,-94.7,-23.5,-92.5C-23,-90.2,-22.5,-88,-22,-85.7C-21.6,-83.4,-21.2,-81.2,-20.8,-78.9C-20.4,-76.6,-20,-74.3,-19.7,-72C-19.3,-69.7,-19,-67.4,-18.6,-65.1C-18.3,-62.8,-18,-60.5,-17.7,-58.2C-17.4,-55.9,-17.1,-53.6,-16.9,-51.3C-16.6,-49,-16.3,-46.6,-16.1,-44.3C-15.8,-42,-15.6,-39.7,-15.3,-37.4C-15.1,-35.1,-14.8,-32.7,-14.6,-30.4C-14.4,-28.1,-14.1,-25.8,-13.9,-23.5C-13.7,-21.1,-13.4,-18.8,-13.2,-16.5C-13,-14.2,-12.7,-11.9,-12.5,-9.5C-12.3,-7.2,-12,-4.9,-11.8,-2.6C-11.6,-0.2,-11.3,2.1,-11.1,4.4C-10.8,6.7,-10.6,9,-10.3,11.4C-10.1,13.7,-9.8,16,-9.6,18.3C-9.3,20.7,-9,23,-8.7,25.3C-8.5,27.6,-8.2,29.9,-7.9,32.3C-7.5,34.6,-7.2,36.9,-6.9,39.2C-6.6,41.5,-6.2,43.8,-5.9,46.1C-5.5,48.5,-5.1,50.8,-4.7,53.1C-4.3,55.4,-3.9,57.7,-3.5,60C-3.1,62.3,-2.6,64.6,-2.1,66.9C-1.6,69.2,-1.1,71.5,-0.6,73.7C-0.1,76,0.5,78.3,1.1,80.6C1.7,82.8,2.4,85.1,3,87.3C3.7,89.6,4.4,91.8,5.2,94C6,96.3,6.8,98.5,7.7,100.6C8.5,102.8,9.5,105,10.5,107.1C11.5,109.2,12.5,111.3,13.7,113.4C14.8,115.5,16.1,117.5,17.4,119.4C18.7,121.4,20.1,123.3,21.7,125.1C23.2,126.9,24.8,128.6,26.6,130.2C28.4,131.7,30.2,133.2,32.2,134.5C34.2,135.8,36.3,136.9,38.5,137.9C40.6,138.8,42.8,139.6,45.2,140.2C47.6,140.7,50.2,141.1,52.2,141.3C54.2,141.5,55.5,141.5,56.9,141.5C57.2,141.5,57.5,141.3,57.5,141C57.5,140.7,57.2,140.5,56.9,140.5C55.5,140.5,54.2,140.5,52.3,140.3C50.3,140,47.8,139.6,45.5,139C43.1,138.5,41,137.7,39,136.7C36.9,135.8,34.9,134.7,33,133.4C31.1,132.1,29.3,130.6,27.6,129.1C25.9,127.5,24.3,125.8,22.9,124.1C21.4,122.3,20,120.4,18.8,118.5C17.5,116.6,16.3,114.6,15.2,112.6C14.1,110.5,13.1,108.4,12.1,106.3C11.2,104.2,10.3,102.1,9.5,99.9C8.6,97.8,7.9,95.6,7.1,93.4C6.4,91.2,5.7,89,5.1,86.7C4.5,84.5,3.9,82.3,3.3,80C2.7,77.7,2.2,75.5,1.7,73.2C1.2,70.9,0.7,68.7,0.3,66.4C-0.2,64.1,-0.6,61.8,-1,59.5C-1.4,57.2,-1.8,54.9,-2.1,52.6C-2.5,50.4,-2.8,48,-3.2,45.7C-3.5,43.4,-3.8,41.1,-4.1,38.8C-4.4,36.5,-4.7,34.2,-4.9,31.9C-5.2,29.6,-5.5,27.3,-5.7,25C-6,22.6,-6.2,20.3,-6.5,18C-6.7,15.7,-6.9,13.4,-7.1,11C-7.4,8.7,-7.6,6.4,-7.8,4.1C-8,1.8,-8.2,-0.6,-8.4,-2.9C-8.6,-5.2,-8.8,-7.5,-9,-9.9C-9.2,-12.2,-9.4,-14.5,-9.6,-16.8C-9.8,-19.2,-10,-21.5,-10.2,-23.8C-10.4,-26.1,-10.6,-28.5,-10.8,-30.8C-11,-33.1,-11.2,-35.4,-11.4,-37.8C-11.6,-40.1,-11.8,-42.4,-12.1,-44.7C-12.3,-47.1,-12.5,-49.4,-12.8,-51.7C-13,-54.1,-13.3,-56.4,-13.5,-58.7C-13.8,-61,-14.1,-63.4,-14.4,-65.7C-14.7,-68,-15,-70.3,-15.3,-72.7C-15.6,-75,-16,-77.3,-16.3,-79.6C-16.7,-81.9,-17.1,-84.3,-17.5,-86.6C-17.9,-88.9,-18.4,-91.2,-18.9,-93.5C-19.4,-95.8,-19.9,-98.1,-20.4,-100.4C-21,-102.7,-21.6,-105,-22.3,-107.3C-23,-109.5,-23.8,-111.8,-24.5,-114.1z" stroke="#6cc9e5" stroke-linejoin="round" id="165" ed:tosuperid="164" fill="#6cc9e5" transform="matrix(1,0,0,1,132,820)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="164" d="M-13.5,10.1C-0.4,10.1,-0.1,-10.1,13.5,-10.1" stroke="#6cc9e5" stroke-linejoin="round" id="167" ed:tosuperid="166" fill="none" transform="matrix(1,0,0,1,350,951)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="164" d="M-13.5,-5.6C-1.4,-5.6,2.4,5.6,13.5,5.6" stroke="#6cc9e5" stroke-linejoin="round" id="169" ed:tosuperid="168" fill="none" transform="matrix(1,0,0,1,350,966)" stroke-linecap="round"/>
+    <path stroke-width="2" ed:parentid="155" d="M-13.5,15.6C0.9,15.6,-2.9,-15.6,13.5,-15.6" stroke="#f1a3dc" stroke-linejoin="round" id="198" ed:tosuperid="157" fill="none" transform="matrix(1,0,0,1,367,836)" stroke-linecap="round"/>
+    <g ed:width="101.52" ed:topictype="mainidea" id="101" ed:layout="rightmap" ed:height="58" transform="matrix(1,0,0,1,24,650)">
+        <path stroke-width="4" d="M29,0L72.5,0C88.5,0,101.5,13,101.5,29C101.5,45,88.5,58,72.5,58L29,58C13,58,0,45,0,29C0,13,13,0,29,0z" stroke="#ffffff" stroke-linejoin="round" fill="#ffffff"/>
+        <text class="st37">
+            <tspan style="white-space:pre" y="35" x="25">DOM</tspan>
+        </text>
+    </g>
+    <g ed:width="89" ed:parentid="101" id="102" ed:height="33.75" transform="matrix(1,0,0,1,189,386)">
+        <path stroke-width="2" d="M0,33.8L89,33.8" stroke="#ff7575" stroke-linejoin="round" fill="none"/>
+        <text class="st38">
+            <tspan style="white-space:pre" y="21.6" x="17">文档</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>基础材料,网页的组成元素;&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>document&lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(56,9)"/>
+        </g>
+    </g>
+    <symbol id="note">
+        <image xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAABu0lEQVQ4EaVTzysEcRT/fGeZHZQDmxihZEspoXDzmxIpR6F2b/4ARznZ5OAsUg4SBzdbcqJclCIlUnvAYaNEfs/Ozs54b9oZe5gheTXv+/p83+e9z5uZJ5A1y7KqKYzSozqYz5kkfE0Iccv3gh2Ra8zkwaV+PKOYH3c2xriXSYXlltw6p0lqVz0XkbJJESbLbTFROJbw4tkY3xFZcC4BrBZOAZU7SxWddmJA7bLPXBeo7CapJkRxLaCUsUp71LzcJCcOdq464fdJ5NThFJB+g9y+wHgZO0cBx/5GZG13GFb6FXnhCaQOJmE9Xw3Ru2v4vQCR9aNpkm8AH/eQQs2QW2ah7UfzqeO45wiulCzZSj1CGYzDSGxC2xulaxNK74ZOwfqPBbgzk4MdKzSsDBEsBTIa5LZ5epnhOH3GS98RjIslWO9Jl5y5iUM/jUEZ2Eb6YplFPrDzVaCfLULp27I7u+SedepcB/PpnLm2eReg2dnMlwTNvQHjegcFI/sQRVU2nuu8R8h8IhBqgvlwAqmk0ZfMhRwFSf7HaR8E/eOEFiHYv53byI0pB5xLAC/V/5fJ3TzeSCoYoedP6/wFlzuxc9t/NpsAAAAASUVORK5CYII=" height="16" width="16"/>
+    </symbol>
+    <g ed:width="68" ed:parentid="101" id="104" ed:height="33.75" transform="matrix(1,0,0,1,189,479)">
+        <path stroke-width="2" d="M0,33.8L68,33.8" stroke="#5fb7f1" stroke-linejoin="round" fill="none"/>
+        <text class="st38">
+            <tspan style="white-space:pre" y="21.6" x="17">对象</tspan>
+        </text>
+    </g>
+    <g ed:width="245" ed:parentid="104" id="106" ed:height="24.75" transform="matrix(1,0,0,1,284,452)">
+        <path stroke-width="2" d="M0,24.8L245,24.8" stroke="#5fb7f1" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">用户定义对象(user-defined object)</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>程序员自行创建的对象&lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(219,4)"/>
+        </g>
+    </g>
+    <g ed:width="178" ed:parentid="104" id="110" ed:height="24.75" transform="matrix(1,0,0,1,284,484)">
+        <path stroke-width="2" d="M0,24.8L178,24.8" stroke="#5fb7f1" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">内建对象(native object)</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>土著函数&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>Array,Math,Date&lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(152,4)"/>
+        </g>
+    </g>
+    <g ed:width="168" ed:parentid="104" id="112" ed:height="24.75" transform="matrix(1,0,0,1,284,515)">
+        <path stroke-width="2" d="M0,24.8L168,24.8" stroke="#5fb7f1" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">宿主对象(host object)</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'微软雅黑';&quot;>浏览器土著函数&lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(142,4)"/>
+        </g>
+    </g>
+    <g ed:width="89" ed:parentid="101" id="114" ed:height="33.75" transform="matrix(1,0,0,1,189,573)">
+        <path stroke-width="2" d="M0,33.8L89,33.8" stroke="#ffcd55" stroke-linejoin="round" fill="none"/>
+        <text class="st38">
+            <tspan style="white-space:pre" y="21.6" x="17">模型</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:19px; background-color:#282a36;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;!DOCTYPE &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>html&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;html &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>lang&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;en&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;head&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;meta &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>charset&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;UTF-8&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;meta &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>name&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;viewport&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;> &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>content&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;title&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>Shopping&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/title&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/head&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;body&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;h1&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>What to buy&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/h1&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;P &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>title&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;a gentle reminder&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>Don't forget to buy this stuff.&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/P&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;ul &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>id&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;purchases&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;li&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>A tin of beans&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/li&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;li &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>class&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;sale&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>Cheese&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/lic&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;li &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#50fa7b; background-color:#23101b;&quot;>class&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f1fa8c; background-color:#23101b;&quot;>&amp;quot;sale important&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>Milk&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/li&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;> &lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/ul&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#f8f8f2; background-color:#23101b;&quot;>  &lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/body&amp;gt;&lt;/span>&lt;/pre>&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14px; color:#ff79c6; background-color:#23101b;&quot;>&amp;lt;/html&amp;gt;&lt;/span>&lt;/pre>&lt;/body>">
+            <use xlink:href="#note" transform="translate(56,9)"/>
+        </g>
+    </g>
+    <g ed:width="72" ed:topictype="floating" id="116" ed:layout="bottom" ed:height="36" transform="matrix(1,0,0,1,714,21)">
+        <path d="M4,0L68,0C70.7,0,72,1.3,72,4L72,32C72,34.7,70.7,36,68,36L4,36C1.3,36,0,34.7,0,32L0,4C0,1.3,1.3,0,4,0z" stroke="#a98ae7" stroke-linejoin="round" fill="#a98ae7"/>
+        <text class="st40">
+            <tspan style="white-space:pre" y="22.4" x="18">html</tspan>
+        </text>
+    </g>
+    <g ed:width="52" ed:parentid="116" id="117" ed:height="26" transform="matrix(1,0,0,1,611,102)">
+        <path stroke-width="2" d="M0,0L52,0L52,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">head</tspan>
+        </text>
+    </g>
+    <g ed:width="53" ed:parentid="116" id="119" ed:height="26" transform="matrix(1,0,0,1,786,102)">
+        <path stroke-width="2" d="M0,0L53,0L53,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">body</tspan>
+        </text>
+    </g>
+    <g ed:width="53" ed:parentid="117" id="121" ed:height="26" transform="matrix(1,0,0,1,582,173)">
+        <path stroke-width="2" d="M0,0L53,0L53,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">meta</tspan>
+        </text>
+    </g>
+    <g ed:width="45" ed:parentid="117" id="123" ed:height="26" transform="matrix(1,0,0,1,648,173)">
+        <path stroke-width="2" d="M0,0L45,0L45,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">title</tspan>
+        </text>
+    </g>
+    <g ed:width="38" ed:parentid="119" id="125" ed:height="26" transform="matrix(1,0,0,1,707,173)">
+        <path stroke-width="2" d="M0,0L38,0L38,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">h1</tspan>
+        </text>
+    </g>
+    <g ed:width="30" ed:parentid="119" id="127" ed:height="26" transform="matrix(1,0,0,1,758,173)">
+        <path stroke-width="2" d="M0,0L30,0L30,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">p</tspan>
+        </text>
+    </g>
+    <g ed:width="33" ed:parentid="119" id="129" ed:height="26" transform="matrix(1,0,0,1,844,173)">
+        <path stroke-width="2" d="M0,0L33,0L33,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">ul</tspan>
+        </text>
+    </g>
+    <g ed:width="30" ed:parentid="129" id="131" ed:height="26" transform="matrix(1,0,0,1,802,244)">
+        <path stroke-width="2" d="M0,0L30,0L30,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">li</tspan>
+        </text>
+    </g>
+    <g ed:width="30" ed:parentid="129" id="133" ed:height="26" transform="matrix(1,0,0,1,845,244)">
+        <path stroke-width="2" d="M0,0L30,0L30,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">li</tspan>
+        </text>
+    </g>
+    <g ed:width="30" ed:parentid="129" id="135" ed:height="26" transform="matrix(1,0,0,1,889,244)">
+        <path stroke-width="2" d="M0,0L30,0L30,26L0,26L0,0z" stroke="#80cf70" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16.9" x="9">li</tspan>
+        </text>
+    </g>
+    <g ed:width="68" ed:parentid="101" id="138" ed:height="33.75" transform="matrix(1,0,0,1,189,744)">
+        <path stroke-width="2" d="M0,33.8L68,33.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st38">
+            <tspan style="white-space:pre" y="21.6" x="17">节点</tspan>
+        </text>
+    </g>
+    <g ed:width="70" ed:parentid="138" id="140" ed:height="24.75" transform="matrix(1,0,0,1,284,639)">
+        <path stroke-width="2" d="M0,24.8L70,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">元素节点</tspan>
+        </text>
+    </g>
+    <g ed:width="70" ed:parentid="138" id="142" ed:height="24.75" transform="matrix(1,0,0,1,284,671)">
+        <path stroke-width="2" d="M0,24.8L70,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">文本节点</tspan>
+        </text>
+    </g>
+    <g ed:width="70" ed:parentid="138" id="147" ed:height="24.75" transform="matrix(1,0,0,1,284,702)">
+        <path stroke-width="2" d="M0,24.8L70,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">属性节点</tspan>
+        </text>
+    </g>
+    <g ed:width="43" ed:parentid="138" id="149" ed:height="24.75" transform="matrix(1,0,0,1,284,749)">
+        <path stroke-width="2" d="M0,24.8L43,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">CSS</tspan>
+        </text>
+    </g>
+    <g ed:width="73" ed:parentid="149" id="151" ed:height="24.75" transform="matrix(1,0,0,1,354,733)">
+        <path stroke-width="2" d="M0,24.8L73,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">class属性</tspan>
+        </text>
+    </g>
+    <g ed:width="55" ed:parentid="149" id="153" ed:height="24.75" transform="matrix(1,0,0,1,354,764)">
+        <path stroke-width="2" d="M0,24.8L55,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">id属性</tspan>
+        </text>
+    </g>
+    <g ed:width="70" ed:parentid="138" id="155" ed:height="24.75" transform="matrix(1,0,0,1,284,827)">
+        <path stroke-width="2" d="M0,24.8L70,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">获取元素</tspan>
+        </text>
+    </g>
+    <g ed:width="135" ed:parentid="155" id="157" ed:height="24.75" transform="matrix(1,0,0,1,381,796)">
+        <path stroke-width="2" d="M0,24.8L135,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">getElementById</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;!DOCTYPE &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>html&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;                                                           &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;html &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>lang&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;en&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;                                                          &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;head&amp;gt;                                                                    &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;meta &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>charset&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;UTF-8&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;                                                &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;meta &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>name&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;viewport&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;> &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>content&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;title&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>Shopping&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/title&amp;gt;                                               &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/head&amp;gt;                                                               &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;body&amp;gt;                                                                    &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;h1&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>What to buy&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/h1&amp;gt;                                                  &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;P &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>title&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;a gentle reminder&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>Don't forget to buy this stuff.&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/P&amp;gt;      &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;ul &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>id&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;purchases&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;                                                   &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;li&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>A tin of beans&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/li&amp;gt;                                           &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;li &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>class&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;sale&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>Cheese&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/lic&amp;gt;                                     &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;li &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>class&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;sale important&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>Milk&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/li&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>                              &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/ul&amp;gt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>                                                                 &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;script&amp;gt;                                                              &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>        &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>alert&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>typeof&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> document.&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getElementById&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;purchases&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>));               &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>    &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/script&amp;gt;                                                             &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/body&amp;gt;                                                                   &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;/html&amp;gt;                                                                   &lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(109,4)"/>
+        </g>
+    </g>
+    <g ed:width="167" ed:parentid="155" id="160" ed:height="24.75" transform="matrix(1,0,0,1,381,827)">
+        <path stroke-width="2" d="M0,24.8L167,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">getElementsByTagName</tspan>
+        </text>
+    </g>
+    <g ed:width="184" ed:parentid="155" id="162" ed:height="24.75" transform="matrix(1,0,0,1,381,858)">
+        <path stroke-width="2" d="M0,24.8L184,24.8" stroke="#f1a3dc" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">getElenmentsByClassName</tspan>
+        </text>
+    </g>
+    <g ed:width="148" ed:parentid="101" id="164" ed:height="33.75" transform="matrix(1,0,0,1,189,927)">
+        <path stroke-width="2" d="M0,33.8L148,33.8" stroke="#6cc9e5" stroke-linejoin="round" fill="none"/>
+        <text class="st38">
+            <tspan style="white-space:pre" y="21.6" x="17">获取和设置属性</tspan>
+        </text>
+    </g>
+    <g ed:width="114" ed:parentid="164" id="166" ed:height="24.75" transform="matrix(1,0,0,1,364,916)">
+        <path stroke-width="2" d="M0,24.8L114,24.8" stroke="#6cc9e5" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">getAttribute</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; font-style:italic; color:#8be9fd; background-color:#000000;&quot;>var&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> paras&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>document.&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getElementsByTagName&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;p&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>);                     &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>for&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> (&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; font-style:italic; color:#8be9fd; background-color:#000000;&quot;>let&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> i &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#bd93f9; background-color:#000000;&quot;>0&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>; i &lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>&amp;lt;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>paras.length; i&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>++&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>) {                           &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>&#x9;&#x9;alert&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(paras[i].&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getAttribute&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;title&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>));                         &lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; &quot;>&lt;span style=&quot; font-family:'宋体'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>}                                                                 &lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(88,4)"/>
+        </g>
+    </g>
+    <g ed:width="112" ed:parentid="164" id="168" ed:height="24.75" transform="matrix(1,0,0,1,364,947)">
+        <path stroke-width="2" d="M0,24.8L112,24.8" stroke="#6cc9e5" stroke-linejoin="round" fill="none"/>
+        <text class="st39">
+            <tspan style="white-space:pre" y="16" x="8">setAttribute</tspan>
+        </text>
+        <g ed:note="&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:19px; background-color:#282a36;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; font-style:italic; color:#8be9fd; background-color:#000000;&quot;>var&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;> shopping&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#ff79c6; background-color:#000000;&quot;>=&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>document.&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getElementById&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;purchases&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>);&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>alert&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(shopping.&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getAttribute&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;title&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>));&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>shopping.&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>setAttribute&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;title&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>,&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;a list of goods&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>);&lt;/span>&lt;/p>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>alert&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(shopping.&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#50fa7b; background-color:#000000;&quot;>getAttribute&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>(&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f1fa8c; background-color:#000000;&quot;>&amp;quot;title&amp;quot;&lt;/span>&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:11pt; color:#f8f8f2; background-color:#000000;&quot;>));&lt;/span>&lt;/p>&lt;/body>">
+            <use xlink:href="#note" transform="translate(86,4)"/>
+        </g>
+    </g>
+    <g ed:width="679.296875" ed:topictype="floating" id="199" ed:layout="rightmap" ed:height="356" transform="matrix(1,0,0,1,634,460)">
+        <path d="M4,0L675.3,0C678,0,679.3,1.3,679.3,4L679.3,352C679.3,354.7,678,356,675.3,356L4,356C1.3,356,0,354.7,0,352L0,4C0,1.3,1.3,0,4,0z" stroke="#a98ae7" stroke-linejoin="round" fill="#000000"/>
+        <rect y="7.4" height="17" width="87" x="18.3" fill="#000000"/>
+        <rect y="7.4" height="17" width="32" x="105.3" fill="#000000"/>
+        <rect y="7.4" height="17" width="480" x="137.3" fill="#000000"/>
+        <rect y="24.4" height="17" width="55" x="18.3" fill="#000000"/>
+        <rect y="24.4" height="17" width="32" x="73.3" fill="#000000"/>
+        <rect y="24.4" height="17" width="8" x="105.3" fill="#000000"/>
+        <rect y="24.4" height="17" width="32" x="113.3" fill="#000000"/>
+        <rect y="24.4" height="17" width="472" x="145.3" fill="#000000"/>
+        <rect y="41.4" height="17" width="592" x="18.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="55" x="50.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="56" x="105.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="8" x="161.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="56" x="169.3" fill="#000000"/>
+        <rect y="58.4" height="17" width="392" x="225.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="55" x="50.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="32" x="105.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="8" x="137.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="80" x="145.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="8" x="225.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="56" x="233.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="8" x="289.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="319" x="297.3" fill="#000000"/>
+        <rect y="75.4" height="17" width="8" x="616.3" fill="#000000"/>
+        <rect y="92.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="92.4" height="17" width="56" x="50.3" fill="#000000"/>
+        <rect y="92.4" height="17" width="64" x="106.3" fill="#000000"/>
+        <rect y="92.4" height="17" width="440" x="170.3" fill="#000000"/>
+        <rect y="109.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="109.4" height="17" width="560" x="50.3" fill="#000000"/>
+        <rect y="126.4" height="17" width="592" x="18.3" fill="#000000"/>
+        <rect y="143.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="143.4" height="17" width="32" x="50.3" fill="#000000"/>
+        <rect y="143.4" height="17" width="102" x="82.3" fill="#000000"/>
+        <rect y="143.4" height="17" width="440" x="184.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="31" x="50.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="40" x="81.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="8" x="121.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="166" x="129.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="8" x="295.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="283" x="303.3" fill="#000000"/>
+        <rect y="160.4" height="17" width="72" x="586.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="39" x="50.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="16" x="89.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="8" x="105.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="88" x="113.3" fill="#000000"/>
+        <rect y="177.4" height="17" width="416" x="201.3" fill="#000000"/>
+        <rect y="194.4" height="17" width="64" x="18.3" fill="#000000"/>
+        <rect y="194.4" height="17" width="32" x="82.3" fill="#000000"/>
+        <rect y="194.4" height="17" width="133" x="114.3" fill="#000000"/>
+        <rect y="194.4" height="17" width="384" x="247.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="64" x="18.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="39" x="82.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="40" x="121.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="8" x="161.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="48" x="169.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="8" x="217.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="48" x="225.3" fill="#000000"/>
+        <rect y="211.4" height="17" width="344" x="273.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="64" x="18.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="39" x="82.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="40" x="121.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="8" x="161.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="135" x="169.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="8" x="304.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="32" x="312.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="40" x="344.3" fill="#000000"/>
+        <rect y="228.4" height="17" width="240" x="384.3" fill="#000000"/>
+        <rect y="245.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="245.4" height="17" width="40" x="50.3" fill="#000000"/>
+        <rect y="245.4" height="17" width="520" x="90.3" fill="#000000"/>
+        <rect y="262.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="262.4" height="17" width="560" x="50.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="64" x="18.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="40" x="82.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="8" x="122.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="48" x="130.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="87" x="178.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="112" x="265.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="8" x="377.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="88" x="385.3" fill="#000000"/>
+        <rect y="279.4" height="17" width="144" x="473.3" fill="#000000"/>
+        <rect y="296.4" height="17" width="32" x="18.3" fill="#000000"/>
+        <rect y="296.4" height="17" width="560" x="50.3" fill="#000000"/>
+        <rect y="313.4" height="17" width="592" x="18.3" fill="#000000"/>
+        <rect y="330.4" height="17" width="592" x="18.3" fill="#000000"/>
+        <text class="st40">
+            <tspan style="white-space:pre" y="21.4" x="18" class="st41">&lt;!DOCTYPE </tspan>
+            <tspan style="white-space:pre" class="st42">html</tspan>
+            <tspan style="white-space:pre" class="st41">>                                                           </tspan>
+            <tspan style="white-space:pre" y="38.4" x="18" class="st41">&lt;html </tspan>
+            <tspan style="white-space:pre" class="st42">lang</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"en"</tspan>
+            <tspan style="white-space:pre" class="st41">>                                                          </tspan>
+            <tspan style="white-space:pre" y="55.4" x="18" class="st41">&lt;head>                                                                    </tspan>
+            <tspan style="white-space:pre" y="72.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;meta </tspan>
+            <tspan style="white-space:pre" class="st42">charset</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"UTF-8"</tspan>
+            <tspan style="white-space:pre" class="st41">>                                                </tspan>
+            <tspan style="white-space:pre" y="89.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;meta </tspan>
+            <tspan style="white-space:pre" class="st42">name</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"viewport"</tspan>
+            <tspan style="white-space:pre" class="st41"> </tspan>
+            <tspan style="white-space:pre" class="st42">content</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"width=device-width, initial-scale=1.0"</tspan>
+            <tspan style="white-space:pre" class="st41">></tspan>
+            <tspan style="white-space:pre" y="106.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;title></tspan>
+            <tspan style="white-space:pre" class="st44">Shopping</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/title>                                               </tspan>
+            <tspan style="white-space:pre" y="123.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/head>                                                               </tspan>
+            <tspan style="white-space:pre" y="140.4" x="18" class="st41">&lt;body>                                                                    </tspan>
+            <tspan style="white-space:pre" y="157.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;h1></tspan>
+            <tspan style="white-space:pre" class="st44">What to buy</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/h1>                                                  </tspan>
+            <tspan style="white-space:pre" y="174.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;P </tspan>
+            <tspan style="white-space:pre" class="st42">title</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"a gentle reminder"</tspan>
+            <tspan style="white-space:pre" class="st41">></tspan>
+            <tspan style="white-space:pre" class="st44">Don't forget to buy this stuff.</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/P>      </tspan>
+            <tspan style="white-space:pre" y="191.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;ul </tspan>
+            <tspan style="white-space:pre" class="st42">id</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"purchases"</tspan>
+            <tspan style="white-space:pre" class="st41">>                                                   </tspan>
+            <tspan style="white-space:pre" y="208.4" x="18" class="st44">        </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;li></tspan>
+            <tspan style="white-space:pre" class="st44">A tin of beans</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/li>                                           </tspan>
+            <tspan style="white-space:pre" y="225.4" x="18" class="st44">        </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;li </tspan>
+            <tspan style="white-space:pre" class="st42">class</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"sale"</tspan>
+            <tspan style="white-space:pre" class="st41">></tspan>
+            <tspan style="white-space:pre" class="st44">Cheese</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/lic>                                     </tspan>
+            <tspan style="white-space:pre" y="242.4" x="18" class="st44">        </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;li </tspan>
+            <tspan style="white-space:pre" class="st42">class</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st43">"sale important"</tspan>
+            <tspan style="white-space:pre" class="st41">></tspan>
+            <tspan style="white-space:pre" class="st44">Milk</tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/li></tspan>
+            <tspan style="white-space:pre" class="st44">                              </tspan>
+            <tspan style="white-space:pre" y="259.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/ul></tspan>
+            <tspan style="white-space:pre" class="st44">                                                                 </tspan>
+            <tspan style="white-space:pre" y="276.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;script>                                                              </tspan>
+            <tspan style="white-space:pre" y="293.4" x="18" class="st44">        </tspan>
+            <tspan style="white-space:pre" class="st42">alert</tspan>
+            <tspan style="white-space:pre" class="st44">(</tspan>
+            <tspan style="white-space:pre" class="st41">typeof</tspan>
+            <tspan style="white-space:pre" class="st44"> document.</tspan>
+            <tspan style="white-space:pre" class="st42">getElementById</tspan>
+            <tspan style="white-space:pre" class="st44">(</tspan>
+            <tspan style="white-space:pre" class="st43">"purchases"</tspan>
+            <tspan style="white-space:pre" class="st44">));               </tspan>
+            <tspan style="white-space:pre" y="310.4" x="18" class="st44">    </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;/script>                                                             </tspan>
+            <tspan style="white-space:pre" y="327.4" x="18" class="st41">&lt;/body>                                                                   </tspan>
+            <tspan style="white-space:pre" y="344.4" x="18" class="st41">&lt;/html>                                                                   </tspan>
+        </text>
+    </g>
+    <g ed:width="419.5" ed:topictype="floating" id="201" ed:layout="rightmap" ed:height="84" transform="matrix(1,0,0,1,663,908)">
+        <path d="M4,0L415.5,0C418.2,0,419.5,1.3,419.5,4L419.5,80C419.5,82.7,418.2,84,415.5,84L4,84C1.3,84,0,82.7,0,80L0,4C0,1.3,1.3,0,4,0z" stroke="#a98ae7" stroke-linejoin="round" fill="#000000"/>
+        <rect y="7.5" height="17" width="24" x="18.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="55" x="42.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="8" x="97.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="72" x="105.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="160" x="177.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="8" x="337.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="24" x="345.3" fill="#000000"/>
+        <rect y="7.5" height="17" width="29" x="369.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="24" x="18.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="23" x="42.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="24" x="65.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="38" x="89.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="8" x="127.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="8" x="135.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="8" x="143.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="46" x="151.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="8" x="197.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="127" x="205.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="16" x="332.3" fill="#000000"/>
+        <rect y="24.5" height="17" width="50" x="348.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="80" x="18.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="80" x="98.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="96" x="178.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="8" x="274.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="56" x="282.3" fill="#000000"/>
+        <rect y="41.5" height="17" width="60" x="338.3" fill="#000000"/>
+        <rect y="58.5" height="17" width="380" x="18.3" fill="#000000"/>
+        <text class="st40">
+            <tspan style="white-space:pre" y="21.5" x="18" class="st45">var</tspan>
+            <tspan style="white-space:pre" class="st44"> paras</tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st44">document.</tspan>
+            <tspan style="white-space:pre" class="st42">getElementsByTagName</tspan>
+            <tspan style="white-space:pre" class="st44">(</tspan>
+            <tspan style="white-space:pre" class="st43">"p"</tspan>
+            <tspan style="white-space:pre" class="st44">);                     </tspan>
+            <tspan style="white-space:pre" y="38.5" x="18" class="st41">for</tspan>
+            <tspan style="white-space:pre" class="st44"> (</tspan>
+            <tspan style="white-space:pre" class="st45">let</tspan>
+            <tspan style="white-space:pre" class="st44"> i </tspan>
+            <tspan style="white-space:pre" class="st41">=</tspan>
+            <tspan style="white-space:pre" class="st44"> </tspan>
+            <tspan style="white-space:pre" class="st46">0</tspan>
+            <tspan style="white-space:pre" class="st44">; i </tspan>
+            <tspan style="white-space:pre" class="st41">&lt;</tspan>
+            <tspan style="white-space:pre" class="st44">paras.length; i</tspan>
+            <tspan style="white-space:pre" class="st41">++</tspan>
+            <tspan style="white-space:pre" class="st44">){                           </tspan>
+            <tspan style="white-space:pre" y="55.5" x="18" class="st42">     alert</tspan>
+            <tspan style="white-space:pre" class="st44">(paras[i].</tspan>
+            <tspan style="white-space:pre" class="st42">getAttribute</tspan>
+            <tspan style="white-space:pre" class="st44">(</tspan>
+            <tspan style="white-space:pre" class="st43">"title"</tspan>
+            <tspan style="white-space:pre" class="st44">));            </tspan>
+            <tspan style="white-space:pre" y="72.5" x="18" class="st44">}                                                                 </tspan>
+        </text>
+    </g>
+    <g ed:width="439" ed:topictype="floating" id="203" ed:layout="rightmap" ed:height="88" transform="matrix(1,0,0,1,368,1038)">
+        <path d="M4,0L435,0C437.7,0,439,1.3,439,4L439,84C439,86.7,437.7,88,435,88L4,88C1.3,88,0,86.7,0,84L0,4C0,1.3,1.3,0,4,0z" stroke="#a98ae7" stroke-linejoin="round" fill="#000000"/>
+        <rect y="7.5" height="18" width="24" x="18.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="72" x="42.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="8" x="114.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="72" x="122.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="112" x="194.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="8" x="306.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="88" x="314.3" fill="#000000"/>
+        <rect y="7.5" height="18" width="16" x="402.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="40" x="18.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="80" x="58.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="96" x="138.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="8" x="234.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="56" x="242.3" fill="#000000"/>
+        <rect y="25.5" height="18" width="24" x="298.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="72" x="18.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="96" x="90.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="8" x="186.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="56" x="194.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="8" x="250.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="136" x="258.3" fill="#000000"/>
+        <rect y="43.5" height="18" width="16" x="394.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="40" x="18.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="80" x="58.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="96" x="138.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="8" x="234.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="56" x="242.3" fill="#000000"/>
+        <rect y="61.5" height="18" width="24" x="298.3" fill="#000000"/>
+        <text class="st40">
+            <tspan style="white-space:pre" y="20.5" x="18" class="st47">var</tspan>
+            <tspan style="white-space:pre" class="st48"> shopping</tspan>
+            <tspan style="white-space:pre" class="st49">=</tspan>
+            <tspan style="white-space:pre" class="st48">document.</tspan>
+            <tspan style="white-space:pre" class="st50">getElementById</tspan>
+            <tspan style="white-space:pre" class="st48">(</tspan>
+            <tspan style="white-space:pre" class="st51">"purchases"</tspan>
+            <tspan style="white-space:pre" class="st48">);</tspan>
+            <tspan style="white-space:pre" y="38.5" x="18" class="st50">alert</tspan>
+            <tspan style="white-space:pre" class="st48">(shopping.</tspan>
+            <tspan style="white-space:pre" class="st50">getAttribute</tspan>
+            <tspan style="white-space:pre" class="st48">(</tspan>
+            <tspan style="white-space:pre" class="st51">"title"</tspan>
+            <tspan style="white-space:pre" class="st48">));</tspan>
+            <tspan style="white-space:pre" y="56.5" x="18" class="st48">shopping.</tspan>
+            <tspan style="white-space:pre" class="st50">setAttribute</tspan>
+            <tspan style="white-space:pre" class="st48">(</tspan>
+            <tspan style="white-space:pre" class="st51">"title"</tspan>
+            <tspan style="white-space:pre" class="st48">,</tspan>
+            <tspan style="white-space:pre" class="st51">"a list of goods"</tspan>
+            <tspan style="white-space:pre" class="st48">);</tspan>
+            <tspan style="white-space:pre" y="74.5" x="18" class="st50">alert</tspan>
+            <tspan style="white-space:pre" class="st48">(shopping.</tspan>
+            <tspan style="white-space:pre" class="st50">getAttribute</tspan>
+            <tspan style="white-space:pre" class="st48">(</tspan>
+            <tspan style="white-space:pre" class="st51">"title"</tspan>
+            <tspan style="white-space:pre" class="st48">));</tspan>
+        </text>
+    </g>
+    <symbol id="plus">
+        <path d="M11,6C11,8.8,8.8,11,6,11C3.2,11,1,8.8,1,6C1,3.2,3.2,1,6,1C8.8,1,11,3.2,11,6z" fill="url(#lg4)"/>
+        <path stroke-width="0.7" d="M11,6C11,8.8,8.8,11,6,11C3.2,11,1,8.8,1,6C1,3.2,3.2,1,6,1C8.8,1,11,3.2,11,6zM3,6L9,6M6,3L6,9" stroke="#46a000" fill="none"/>
+    </symbol>
+    <symbol id="minus">
+        <path d="M11,6C11,8.8,8.8,11,6,11C3.2,11,1,8.8,1,6C1,3.2,3.2,1,6,1C8.8,1,11,3.2,11,6z" fill="url(#lg4)"/>
+        <path stroke-width="0.7" d="M11,6C11,8.8,8.8,11,6,11C3.2,11,1,8.8,1,6C1,3.2,3.2,1,6,1C8.8,1,11,3.2,11,6zM3,6L9,6" stroke="#46a000" fill="none"/>
+    </symbol>
+    <g ed:togtopicid="101" transform="translate(127,673)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="104" transform="translate(258,490)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="116" transform="translate(744,58)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="117" transform="translate(631,129)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="119" transform="translate(807,129)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="129" transform="translate(854,200)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="138" transform="translate(258,755)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="149" transform="translate(328,755)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="155" transform="translate(355,833)">
+        <use xlink:href="#minus"/>
+    </g>
+    <g ed:togtopicid="164" transform="translate(338,938)">
+        <use xlink:href="#minus"/>
+    </g>
+</svg>
+</div>
+        <div id="copyright">Created With  <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">MindMaster</a></div>
+      </div>
+    </div>
+    <script>eval(atob('dmFyIG11YT13aW5kb3cubmF2aWdhdG9yLnVzZXJBZ2VudDsNCnZhciB1YT0obXVhLmluZGV4T2YoJ3J2OjExJykrbXVhLmluZGV4T2YoJ01TSUUnKSk+PTA7DQpkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc3ZnLWNvbnRhaW5lcicpLm9uY29udGV4dG1lbnUgPSBmdW5jdGlvbiAoZXZlbnQpIHsNCiAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpOw0KfQ0KZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3N2Zy1jb250YWluZXInKS5vbm1vdXNlZG93biA9IGZ1bmN0aW9uIChldmVudCkgew0KICAgIGlmKGV2ZW50LndoaWNoID09Myl7DQogICAgICAgIHRoaXMuc3R5bGUuY3Vyc29yID0gJ3BvaW50ZXInOw0KICAgICAgICB0aGlzLm9ubW91c2Vtb3ZlID0gZnVuY3Rpb24gKGV2KSB7DQogICAgICAgICAgICB0aGlzLnNjcm9sbEJ5KC0oZXYubW92ZW1lbnRYKSwgMCk7DQogICAgICAgICAgICB3aW5kb3cuc2Nyb2xsQnkoMCwtKGV2Lm1vdmVtZW50WSkpDQogICAgICAgIH0NCiAgICAgICAgdGhpcy5vbm1vdXNldXAgPSBmdW5jdGlvbiAoKSB7DQogICAgICAgICAgICB0aGlzLnN0eWxlLmN1cnNvciA9ICBudWxsOw0KICAgICAgICAgICAgdGhpcy5vbm1vdXNldXAgPSBudWxsOw0KICAgICAgICAgICAgdGhpcy5vbm1vdXNlbW92ZSA9IG51bGw7DQogICAgICAgIH0NCiAgICB9DQp9DQpOdW1iZXIucHJvdG90eXBlLnRvc3VpdHN2Zz1mdW5jdGlvbiAoKSB7DQogICAgdmFyIG51bT10aGlzLnZhbHVlT2YoKTsNCiAgICBpZihudW0lMT09PTApew0KICAgICAgICByZXR1cm4gbnVtKzAuNQ0KICAgIH1lbHNlIHJldHVybiBudW07DQp9Ow0KTnVtYmVyLnByb3RvdHlwZS5wbHVzej1mdW5jdGlvbigpIHsNCiAgICB2YXIgbnVtPXRoaXMudmFsdWVPZigpOw0KICAgIHJldHVybiBudW08MTA/JzAnK251bTpudW07DQp9Ow0KZnVuY3Rpb24gcGFyc2VEYXRlKG51bSkgew0KICAgIHZhciBkYXRlID0gbmV3IERhdGUobnVtKTsNCiAgICB2YXIgWSA9IGRhdGUuZ2V0RnVsbFllYXIoKSArICctJzsNCiAgICB2YXIgTSA9IChkYXRlLmdldE1vbnRoKCkrMSkucGx1c3ooKSArICctJzsNCiAgICB2YXIgRCA9IGRhdGUuZ2V0RGF0ZSgpLnBsdXN6KCkgKyAnICc7DQogICAgdmFyIGggPSBkYXRlLmdldEhvdXJzKCkucGx1c3ooKSArICc6JzsNCiAgICB2YXIgbW0gPSBkYXRlLmdldE1pbnV0ZXMoKS5wbHVzeigpICsgJzonOw0KICAgIHZhciBzID0gZGF0ZS5nZXRTZWNvbmRzKCkucGx1c3ooKTsNCiAgICByZXR1cm4gWStNK0QraCttbStzOw0KfQ0KLy8tLXByZWRlZmluZWQNCi8vY29tbWVudC0tDQp2YXIgY29tbWVudHM9ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnZz5nW2VkXFw6Y29tbWVudF0nKTsNCmZ1bmN0aW9uIGdldGN3aChwb3B1cCkgew0KICAgIGRvY3VtZW50LmJvZHkuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ3N2ZycpWzBdLmFwcGVuZENoaWxkKHBvcHVwKTsNCiAgICB2YXIgdz1wb3B1cC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKS53aWR0aDsNCiAgICB2YXIgaD1wb3B1cC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKS5oZWlnaHQ7DQogICAgcmV0dXJuIFt3LGhdDQp9DQpmb3IodmFyIGk9MDtpPGNvbW1lbnRzLmxlbmd0aDtpKyspew0KICAgIHZhciBwb3B1cD1kb2N1bWVudC5jcmVhdGVFbGVtZW50TlMoJ2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJywnZycpOw0KICAgIHZhciBwb3B1cFI9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdyZWN0Jyk7DQogICAgdmFyIGhvdmVyPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdyZWN0Jyk7DQogICAgdmFyIG9saW5lPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdyZWN0Jyk7DQogICAgaG92ZXIuc2V0QXR0cmlidXRlKCdmaWxsJywnI2NkY2RmZicpOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgneCcsJzAnKTsNCiAgICBob3Zlci5zZXRBdHRyaWJ1dGUoJ3knLCcwJyk7DQogICAgaG92ZXIuc2V0QXR0cmlidXRlKCdoZWlnaHQnLCcxNicpOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnd2lkdGgnLCcxNicpOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnZmlsbC1vcGFjaXR5JywnMC42Jyk7DQogICAgaG92ZXIuc2V0QXR0cmlidXRlKCd0cmFuc2Zvcm0nLGNvbW1lbnRzW2ldLnF1ZXJ5U2VsZWN0b3IoJ3VzZScpLmdldEF0dHJpYnV0ZSgndHJhbnNmb3JtJykpOw0KICAgIGhvdmVyLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgIGNvbW1lbnRzW2ldLmFwcGVuZENoaWxkKGhvdmVyKTsNCiAgICB2YXIgYT1KU09OLnBhcnNlKGNvbW1lbnRzW2ldLmdldEF0dHJpYnV0ZSgnZWQ6Y29tbWVudCcpKTsNCiAgICB2YXIgaGVpZ2h0PTA7DQogICAgdmFyIGNhcnI9W107DQogICAgZm9yKHZhciBqPTA7ajxhLmxlbmd0aDtqKyspew0KICAgICAgICB2YXIgc3RhbXA9TnVtYmVyKGFbal0uRGF0ZSkqMTAwMDsNCiAgICAgICAgdmFyIHRpbWU9cGFyc2VEYXRlKHN0YW1wKTsNCiAgICAgICAgdmFyIG5hbWU9YVtqXS5OYW1lOw0KICAgICAgICB2YXIgbWVzc2FnZT1hW2pdLk1lc3NhZ2U7DQogICAgICAgIHZhciBtZXNzYWdlQXJyPW1lc3NhZ2Uuc3BsaXQoL1xuLyk7DQogICAgICAgIHZhciBvPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdnJyk7DQogICAgICAgIHZhciBuPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIHZhciB0PWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIHZhciBtPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIG4uc2V0QXR0cmlidXRlKCd4Jyw1KTsNCiAgICAgICAgbi5zZXRBdHRyaWJ1dGUoJ3knLDEyKTsNCiAgICAgICAgbi5zZXRBdHRyaWJ1dGUoJ2ZpbGwnLCcjMDA2ZWZmJyk7DQogICAgICAgIG4udGV4dENvbnRlbnQ9bmFtZSsnOiAnOw0KICAgICAgICBuLnNldEF0dHJpYnV0ZSgnZm9udC1zaXplJywnMTInKTsNCiAgICAgICAgdC5zZXRBdHRyaWJ1dGUoJ3gnLDIwMCk7DQogICAgICAgIHQuc2V0QXR0cmlidXRlKCd5JywxMik7DQogICAgICAgIHQuc2V0QXR0cmlidXRlKCdmaWxsJywnIzk2OTY5NicpOw0KICAgICAgICB0LnRleHRDb250ZW50PXRpbWU7DQogICAgICAgIHQuc2V0QXR0cmlidXRlKCdmb250LXNpemUnLCcxMCcpOw0KICAgICAgICBtLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJywndHJhbnNsYXRlKDIwLDI3KScpOw0KICAgICAgICBtLnNldEF0dHJpYnV0ZSgnZm9udC1zaXplJywnMTInKTsNCiAgICAgICAgZm9yKHZhciBrPTA7azxtZXNzYWdlQXJyLmxlbmd0aDtrKyspew0KICAgICAgICAgICAgdmFyIHRzPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0c3BhbicpOw0KICAgICAgICAgICAgdHMuc2V0QXR0cmlidXRlKCd4JywnMCcpOw0KICAgICAgICAgICAgdHMuc2V0QXR0cmlidXRlKCd5JyxrKjE2KTsNCiAgICAgICAgICAgIHRzLnRleHRDb250ZW50PW1lc3NhZ2VBcnJba107DQogICAgICAgICAgICBtLmFwcGVuZENoaWxkKHRzKTsNCiAgICAgICAgfQ0KICAgICAgICBvLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJywndHJhbnNsYXRlKDAsJytoZWlnaHQrJyknKTsNCiAgICAgICAgby5hcHBlbmRDaGlsZChuKTsNCiAgICAgICAgby5hcHBlbmRDaGlsZCh0KTsNCiAgICAgICAgby5hcHBlbmRDaGlsZChtKTsNCiAgICAgICAgY2Fyci5wdXNoKG8pOw0KICAgICAgICBwb3B1cC5hcHBlbmRDaGlsZChvKTsNCiAgICAgICAgaGVpZ2h0PShtZXNzYWdlQXJyLmxlbmd0aCsxKSoxNitoZWlnaHQ7DQogICAgfQ0KICAgIHZhciB3YXJyPWdldGN3aChwb3B1cCk7DQogICAgb2xpbmUuc2V0QXR0cmlidXRlKCd4JywnMCcpOw0KICAgIG9saW5lLnNldEF0dHJpYnV0ZSgneScsJzAnKTsNCiAgICB2YXIgb3c9d2FyclswXSsxMC41Ow0KICAgIHZhciBvaD13YXJyWzFdKzM7DQogICAgb2xpbmUuc2V0QXR0cmlidXRlKCd3aWR0aCcsb3cpOw0KICAgIG9saW5lLnNldEF0dHJpYnV0ZSgnaGVpZ2h0JyxvaCk7DQogICAgb2xpbmUuc2V0QXR0cmlidXRlKCdmaWxsJywnd2hpdGUnKTsNCiAgICBvbGluZS5zZXRBdHRyaWJ1dGUoJ3N0cm9rZScsJyM2NTY1NjUnKTsNCiAgICBwb3B1cC5hcHBlbmRDaGlsZChvbGluZSk7DQogICAgdmFyIGw9Y2Fyci5sZW5ndGg7DQogICAgd2hpbGUobC0tKXsNCiAgICAgICAgcG9wdXAuYXBwZW5kQ2hpbGQoY2FycltsXSk7DQogICAgfQ0KICAgIHBvcHVwLm9ubW91c2VvdmVyPWZ1bmN0aW9uICgpIHsNCiAgICAgICAgdGhpcy5zdHlsZS5kaXNwbGF5PSdibG9jayc7DQogICAgfTsNCiAgICBwb3B1cC5vbm1vdXNlb3V0PWZ1bmN0aW9uICgpIHsNCiAgICAgICAgdGhpcy5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOw0KICAgIH07DQogICAgdmFyIGNzPWNvbW1lbnRzW2ldLnF1ZXJ5U2VsZWN0b3IoJ3VzZScpLmdldEF0dHJpYnV0ZSgndHJhbnNmb3JtJykubWF0Y2goL1woKFxTKnxcUypcc1xTKilcKS8pWzFdLnNwbGl0KC8gfCwvKTsNCiAgICB2YXIgcHM9Y29tbWVudHNbaV0ucGFyZW50Tm9kZS5nZXRBdHRyaWJ1dGUoJ3RyYW5zZm9ybScpOw0KICAgIGlmKHBzLnN1YnN0cigwLDIpID09ICd0cicpew0KICAgICAgICB2YXIgcHBzID0gcHMubWF0Y2goL1woKFxTKnxcUypcc1xTKilcKS8pWzFdLnNwbGl0KC8gfCwvKTsNCiAgICAgICAgdmFyIHg9cGFyc2VGbG9hdChjc1swXSkrcGFyc2VGbG9hdChwcHNbMF0pOw0KICAgICAgICB2YXIgeT1wYXJzZUZsb2F0KHBwc1sxXSk7DQogICAgICAgIHg9eC50b3N1aXRzdmcoKTsNCiAgICAgICAgeT15LnRvc3VpdHN2ZygpOw0KICAgICAgICB2YXIgdHJzdHIgPSAndHJhbnNsYXRlKCcreCsnLCcreSsnKSc7DQogICAgfQ0KICAgIGVsc2UgaWYocHMuc3Vic3RyKDAsMikgPT0gJ21hJyl7DQogICAgICAgIHZhciBwcHMgPSBwcy5tYXRjaCgvKFwtP1xkKyhcLlxkKyk/KVtcLCBdKFwtP1xkKyhcLlxkKyk/KVtcLCBdKFwtP1xkKyhcLlxkKyk/KVtcLCBdKFwtP1xkKyhcLlxkKyk/KVtcLCBdKFwtP1xkKyhcLlxkKyk/KVtcLCBdKFwtP1xkKyhcLlxkKyk/KVwpJC8pOw0KICAgICAgICB2YXIgbWFBcnIgPSBbcGFyc2VGbG9hdChwcHNbMV0pLHBhcnNlRmxvYXQocHBzWzNdKSxwYXJzZUZsb2F0KHBwc1s1XSkscGFyc2VGbG9hdChwcHNbN10pLHBhcnNlRmxvYXQocHBzWzldKSxwYXJzZUZsb2F0KHBwc1sxMV0pXTsNCiAgICAgICAgaWYobWFBcnJbMV0gPT0gMCl7DQogICAgICAgICAgICB2YXIgeCA9IHBhcnNlRmxvYXQoY3NbMF0pOw0KICAgICAgICAgICAgdmFyIHk9IHBhcnNlRmxvYXQoY3NbMV0pKzE2Ow0KICAgICAgICAgICAgdmFyIHgxID0geCAqIG1hQXJyWzBdICsgeSAqIG1hQXJyWzJdICsgbWFBcnJbNF07DQogICAgICAgICAgICB2YXIgeTEgPSB4ICogbWFBcnJbMV0gKyB5ICogbWFBcnJbM10gKyBtYUFycls1XTsNCiAgICAgICAgICAgIHgxPXgxLnRvc3VpdHN2ZygpOw0KICAgICAgICAgICAgeTE9eTEudG9zdWl0c3ZnKCk7DQogICAgICAgICAgICB2YXIgdHJzdHIgPSAgJ3RyYW5zbGF0ZSgnK3gxKycsJyt5MSsnKSc7DQogICAgICAgIH1lbHNlew0KICAgICAgICAgICAgdmFyIHggPSBwYXJzZUZsb2F0KGNzWzBdKSsxNjsNCiAgICAgICAgICAgIHZhciB5ID0gcGFyc2VGbG9hdChjc1sxXSkrMTY7DQogICAgICAgICAgICB2YXIgeDEgPSB4ICogbWFBcnJbMF0gKyB5ICogbWFBcnJbMl0gKyBtYUFycls0XTsNCiAgICAgICAgICAgIHZhciB5MSA9IHggKiBtYUFyclsxXSArIHkgKiBtYUFyclszXSArIG1hQXJyWzVdOw0KICAgICAgICAgICAgeCA9IHBhcnNlRmxvYXQoY3NbMF0pKzE2Ow0KICAgICAgICAgICAgeSA9IHBhcnNlRmxvYXQoY3NbMV0pOw0KICAgICAgICAgICAgdmFyIHgyID0geCAqIG1hQXJyWzBdICsgeSAqIG1hQXJyWzJdICsgbWFBcnJbNF07DQogICAgICAgICAgICB2YXIgeTIgPSB4ICogbWFBcnJbMV0gKyB5ICogbWFBcnJbM10gKyBtYUFycls1XTsNCiAgICAgICAgICAgIHZhciBmeCA9IHgxPHgyP3gxLnRvc3VpdHN2ZygpOiB4Mi50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgIHZhciBmeSA9IHkxPnkyP3kxLnRvc3VpdHN2ZygpOiB5Mi50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgIHZhciBvZmZ5ID0gTWF0aC5hYnMoeTEteTIpOw0KICAgICAgICAgICAgdmFyIHRyc3RyID0gICd0cmFuc2xhdGUoJytmeCsnLCcrZnkrJyknOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgnaGVpZ2h0JyxvZmZ5LnRvU3RyaW5nKCkpOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgnd2lkdGgnLCcxNicpOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgneScsKC1vZmZ5KS50b1N0cmluZygpKTsNCiAgICAgICAgICAgIHBvcHVwUi5zZXRBdHRyaWJ1dGUoJ2ZpbGwnLCd0cmFuc3BhcmVudCcpOw0KICAgICAgICAgICAgcG9wdXAuYXBwZW5kQ2hpbGQocG9wdXBSKTsNCiAgICAgICAgfQ0KICAgIH0NCiAgICBwb3B1cC5zZXRBdHRyaWJ1dGUoJ3RyYW5zZm9ybScsdHJzdHIpOw0KICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgnY29tbWVudCcsJycpOw0KICAgIHBvcHVwLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgnZWQ6Y29tbWVudGlkJyxjb21tZW50c1tpXS5wYXJlbnROb2RlLmlkKTsNCiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjc3ZnLWNvbnRhaW5lciA+IHN2ZycpLmFwcGVuZENoaWxkKHBvcHVwKTsNCiAgICBjb21tZW50c1tpXS5vbm1vdXNlb3Zlcj1mdW5jdGlvbiAoKSB7DQogICAgICAgIHZhciBjb21tZW50aWQ9dGhpcy5wYXJlbnROb2RlLmlkOw0KICAgICAgICB0aGlzLnF1ZXJ5U2VsZWN0b3IoJ3JlY3QnKS5zdHlsZS5kaXNwbGF5PSdibG9jayc7DQogICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoImdbZWRcXDpjb21tZW50aWQ9JyIrY29tbWVudGlkKyInXVtjb21tZW50XSIpLnN0eWxlLmRpc3BsYXk9J2Jsb2NrJzsNCiAgICB9Ow0KICAgIGNvbW1lbnRzW2ldLm9ubW91c2VvdXQ9ZnVuY3Rpb24gKCkgew0KICAgICAgICB2YXIgY29tbWVudGlkPXRoaXMucGFyZW50Tm9kZS5pZDsNCi8vICAgICAgICB3aW5kb3cuZ2V0U2VsZWN0aW9uKCkucmVtb3ZlQWxsUmFuZ2VzKCk7DQogICAgICAgIHRoaXMucXVlcnlTZWxlY3RvcigncmVjdCcpLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCJnW2VkXFw6Y29tbWVudGlkPSciK2NvbW1lbnRpZCsiJ11bY29tbWVudF0iKS5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICB9DQp9DQovLy0tY29tbWVudA0KLy9ub3RlLS0NCmlmKCF1YSl7DQogICAgdmFyIG5vdGVzPWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ2c+Z1tlZFxcOm5vdGVdJyk7DQogICAgZnVuY3Rpb24gZ2V0d2gocyxwKSB7DQogICAgICAgIHZhciBtYWlucD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsNCiAgICAgICAgbWFpbnAuc3R5bGUuY3NzVGV4dD1zOw0KICAgICAgICBtYWlucC5zdHlsZS5kaXNwbGF5PSdpbmxpbmUtYmxvY2snOw0KCQltYWlucC5zdHlsZS5tYXhXaWR0aCA9ICc0MDBweCc7DQoJCW1haW5wLnN0eWxlLndvcmRCcmVhayA9ICdicmVhay1hbGwnOw0KICAgICAgICBtYWlucC5pbm5lckhUTUw9cDsNCiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChtYWlucCk7DQogICAgICAgIHZhciB3PW1haW5wLmNsaWVudFdpZHRoOw0KICAgICAgICB2YXIgaD1tYWlucC5jbGllbnRIZWlnaHQ7DQogICAgICAgIGRvY3VtZW50LmJvZHkucmVtb3ZlQ2hpbGQobWFpbnApOw0KICAgICAgICByZXR1cm4gW3csaF0NCiAgICB9DQogICAgZm9yKHZhciBpPTA7aTxub3Rlcy5sZW5ndGg7aSsrKXsNCiAgICAgICAgdmFyIGE9bm90ZXNbaV0uZ2V0QXR0cmlidXRlKCdlZDpub3RlJyk7DQoJCXZhciBub3RlTG9jayA9IG5vdGVzW2ldLmdldEF0dHJpYnV0ZSgnZWQ6bm90ZWxvY2snKTsNCiAgICAgICAgaWYobm90ZUxvY2sgPT0gJ3RydWUnKXsNCiAgICAgICAgICAgIGNvbnRpbnVlOw0KICAgICAgICB9DQogICAgICAgIHZhciBtYWlucD1hLm1hdGNoKC88Ym9keVtePl0qPiguKik8XC9ib2R5Pi8pWzFdOw0KICAgICAgICB2YXIgbWFpbnM9YS5tYXRjaCgvc3R5bGU9IiguKj8pIi8pWzFdOw0KICAgICAgICB2YXIgb3V0PWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdnJyk7DQogICAgICAgIHZhciBvbGluZT1kb2N1bWVudC5jcmVhdGVFbGVtZW50TlMoJ2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJywncmVjdCcpOw0KICAgICAgICB2YXIgcG9wdXA9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudE5TKCdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycsJ2ZvcmVpZ25PYmplY3QnKTsNCiAgICAgICAgdmFyIHBvcHVwUj0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudE5TKCdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycsJ3JlY3QnKTsNCiAgICAgICAgdmFyIGhvdmVyPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdyZWN0Jyk7DQogICAgICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnZmlsbCcsJyNjZGNkZmYnKTsNCiAgICAgICAgaG92ZXIuc2V0QXR0cmlidXRlKCd4JywnMCcpOw0KICAgICAgICBob3Zlci5zZXRBdHRyaWJ1dGUoJ3knLCcwJyk7DQogICAgICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnaGVpZ2h0JywnMTYnKTsNCiAgICAgICAgaG92ZXIuc2V0QXR0cmlidXRlKCd3aWR0aCcsJzE2Jyk7DQogICAgICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnZmlsbC1vcGFjaXR5JywnMC42Jyk7DQogICAgICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJyxub3Rlc1tpXS5xdWVyeVNlbGVjdG9yKCd1c2UnKS5nZXRBdHRyaWJ1dGUoJ3RyYW5zZm9ybScpKTsNCiAgICAgICAgaG92ZXIuc3R5bGUuZGlzcGxheT0nbm9uZSc7DQogICAgICAgIG5vdGVzW2ldLmFwcGVuZENoaWxkKGhvdmVyKTsNCiAgICAgICAgcG9wdXAuc3R5bGUuY3NzVGV4dD1tYWluczsNCiAgICAgICAgcG9wdXAuaW5uZXJIVE1MPW1haW5wOw0KICAgICAgICB2YXIgd2g9Z2V0d2gobWFpbnMsbWFpbnApOw0KICAgICAgICBwb3B1cC5zZXRBdHRyaWJ1dGUoJ3dpZHRoJyx3aFswXSk7DQogICAgICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgnaGVpZ2h0Jyx3aFsxXSk7DQogICAgICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJywndHJhbnNsYXRlKDgsNCknKTsNCgkJcG9wdXAuc3R5bGUud29yZEJyZWFrID0gJ2JyZWFrLWFsbCc7DQogICAgICAgIHBvcHVwLnN0eWxlLnRleHRBbGlnbj0nbGVmdCc7DQogICAgICAgIG9saW5lLnNldEF0dHJpYnV0ZSgneCcsJzAnKTsNCiAgICAgICAgb2xpbmUuc2V0QXR0cmlidXRlKCd5JywnMCcpOw0KICAgICAgICBvbGluZS5zZXRBdHRyaWJ1dGUoJ3dpZHRoJyx3aFswXSsxNik7DQogICAgICAgIG9saW5lLnNldEF0dHJpYnV0ZSgnaGVpZ2h0Jyx3aFsxXSs4KTsNCiAgICAgICAgb2xpbmUuc2V0QXR0cmlidXRlKCdzdHJva2UnLCcjYTI3YTAwJyk7DQogICAgICAgIG9saW5lLnNldEF0dHJpYnV0ZSgnZmlsbCcsJyNmZmU3OWQnKTsNCiAgICAgICAgb3V0LmFwcGVuZENoaWxkKG9saW5lKTsNCiAgICAgICAgb3V0LmFwcGVuZENoaWxkKHBvcHVwKTsNCiAgICAgICAgb3V0LnNldEF0dHJpYnV0ZSgnbm90ZScsJycpOw0KICAgICAgICBvdXQuc3R5bGUuZGlzcGxheT0nbm9uZSc7DQogICAgICAgIG91dC5zZXRBdHRyaWJ1dGUoJ2VkOm5vdGVpZCcsbm90ZXNbaV0ucGFyZW50Tm9kZS5pZCk7DQogICAgICAgIG91dC5vbm1vdXNlb3Zlcj1mdW5jdGlvbiAoKSB7DQogICAgICAgICAgICB0aGlzLnN0eWxlLmRpc3BsYXk9J2Jsb2NrJzsNCiAgICAgICAgfTsNCiAgICAgICAgb3V0Lm9ubW91c2VvdXQ9ZnVuY3Rpb24gKCkgew0KLy8gICAgICAgIHdpbmRvdy5nZXRTZWxlY3Rpb24gPyB3aW5kb3cuZ2V0U2VsZWN0aW9uKCkucmVtb3ZlUmFuZ2Uod2luZG93LmdldFNlbGVjdGlvbigpLnJlKTpkb2N1bWVudC5zZWxlY3Rpb24uZW1wdHkoKTsNCg0KICAgICAgICAgICAgdGhpcy5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICAgICAgfTsNCiAgICAgICAgdmFyIGNzPW5vdGVzW2ldLnF1ZXJ5U2VsZWN0b3IoJ3VzZScpLmdldEF0dHJpYnV0ZSgndHJhbnNmb3JtJykubWF0Y2goL1woKFxTKnxcUypcc1xTKilcKS8pWzFdLnNwbGl0KC8gfCwvKTsNCiAgICAgICAgdmFyIHBzPW5vdGVzW2ldLnBhcmVudE5vZGUuZ2V0QXR0cmlidXRlKCd0cmFuc2Zvcm0nKTsNCiAgICAgICAgaWYocHMuc3Vic3RyKDAsMikgPT0gJ3RyJyl7DQogICAgICAgICAgICB2YXIgcHBzID0gcHMubWF0Y2goL1woKFxTKnxcUypcc1xTKilcKS8pWzFdLnNwbGl0KC8gfCwvKTsNCiAgICAgICAgICAgIHZhciB4PXBhcnNlRmxvYXQoY3NbMF0pK3BhcnNlRmxvYXQocHBzWzBdKTsNCiAgICAgICAgICAgIHZhciB5PXBhcnNlRmxvYXQocHBzWzFdKTsNCiAgICAgICAgICAgIHg9eC50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgIHk9eS50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgIHZhciB0cnN0ciA9ICd0cmFuc2xhdGUoJyt4KycsJyt5KycpJzsNCiAgICAgICAgfWVsc2UgaWYocHMuc3Vic3RyKDAsMikgPT0gJ21hJyl7DQogICAgICAgICAgICB2YXIgcHBzID0gcHMubWF0Y2goLyhcLT9cZCsoXC5cZCspPylbXCwgXShcLT9cZCsoXC5cZCspPylbXCwgXShcLT9cZCsoXC5cZCspPylbXCwgXShcLT9cZCsoXC5cZCspPylbXCwgXShcLT9cZCsoXC5cZCspPylbXCwgXShcLT9cZCsoXC5cZCspPylcKSQvKTsNCiAgICAgICAgICAgIHZhciBtYUFyciA9IFtwYXJzZUZsb2F0KHBwc1sxXSkscGFyc2VGbG9hdChwcHNbM10pLHBhcnNlRmxvYXQocHBzWzVdKSxwYXJzZUZsb2F0KHBwc1s3XSkscGFyc2VGbG9hdChwcHNbOV0pLHBhcnNlRmxvYXQocHBzWzExXSldOw0KICAgICAgICAgICAgaWYobWFBcnJbMV0gPT0gMCl7DQogICAgICAgICAgICAgICAgdmFyIHggPSBwYXJzZUZsb2F0KGNzWzBdKTsNCiAgICAgICAgICAgICAgICB2YXIgeSA9IHBhcnNlRmxvYXQoY3NbMV0pKzE2Ow0KICAgICAgICAgICAgICAgIHZhciB4MSA9IHggKiBtYUFyclswXSArIHkgKiBtYUFyclsyXSArIG1hQXJyWzRdOw0KICAgICAgICAgICAgICAgIHZhciB5MSA9IHggKiBtYUFyclsxXSArIHkgKiBtYUFyclszXSArIG1hQXJyWzVdOw0KICAgICAgICAgICAgICAgIHgxPXgxLnRvc3VpdHN2ZygpOw0KICAgICAgICAgICAgICAgIHkxPXkxLnRvc3VpdHN2ZygpOw0KICAgICAgICAgICAgICAgIHZhciB0cnN0ciA9ICAndHJhbnNsYXRlKCcreDErJywnK3kxKycpJzsNCiAgICAgICAgICAgIH1lbHNlew0KICAgICAgICAgICAgICAgIHZhciB4ID0gcGFyc2VGbG9hdChjc1swXSkrMTY7DQogICAgICAgICAgICAgICAgdmFyIHkgPSBwYXJzZUZsb2F0KGNzWzFdKSsxNjsNCiAgICAgICAgICAgICAgICB2YXIgeDEgPSB4ICogbWFBcnJbMF0gKyB5ICogbWFBcnJbMl0gKyBtYUFycls0XTsNCiAgICAgICAgICAgICAgICB2YXIgeTEgPSB4ICogbWFBcnJbMV0gKyB5ICogbWFBcnJbM10gKyBtYUFycls1XTsNCiAgICAgICAgICAgICAgICB4ID0gcGFyc2VGbG9hdChjc1swXSkrMTY7DQogICAgICAgICAgICAgICAgeSA9IHBhcnNlRmxvYXQoY3NbMV0pOw0KICAgICAgICAgICAgICAgIHZhciB4MiA9IHggKiBtYUFyclswXSArIHkgKiBtYUFyclsyXSArIG1hQXJyWzRdOw0KICAgICAgICAgICAgICAgIHZhciB5MiA9IHggKiBtYUFyclsxXSArIHkgKiBtYUFyclszXSArIG1hQXJyWzVdOw0KICAgICAgICAgICAgICAgIHZhciBmeCA9IHgxPHgyP3gxLnRvc3VpdHN2ZygpOiB4Mi50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgICAgICB2YXIgZnkgPSB5MT55Mj95MS50b3N1aXRzdmcoKTogeTIudG9zdWl0c3ZnKCk7DQoJCQkJdmFyIG9mZnkgPSBNYXRoLmFicyh5MS15Mik7CQkJCQkJCQkJCSAgDQogICAgICAgICAgICAgICAgdmFyIHRyc3RyID0gICd0cmFuc2xhdGUoJytmeCsnLCcrZnkrJyknOw0KICAgICAgICAgICAgICAgIHBvcHVwUi5zZXRBdHRyaWJ1dGUoJ2hlaWdodCcsb2ZmeS50b1N0cmluZygpKTsNCiAgICAgICAgICAgICAgICBwb3B1cFIuc2V0QXR0cmlidXRlKCd3aWR0aCcsJzE2Jyk7DQogICAgICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgneScsKC1vZmZ5KS50b1N0cmluZygpKTsNCiAgICAgICAgICAgICAgICBwb3B1cFIuc2V0QXR0cmlidXRlKCdmaWxsJywndHJhbnNwYXJlbnQnKTsNCiAgICAgICAgICAgICAgICBwb3B1cC5hcHBlbmRDaGlsZChwb3B1cFIpOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQogICAgICAgIG91dC5zZXRBdHRyaWJ1dGUoJ3RyYW5zZm9ybScsdHJzdHIpOw0KICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjc3ZnLWNvbnRhaW5lciA+IHN2ZycpLmFwcGVuZENoaWxkKG91dCk7DQogICAgICAgIG5vdGVzW2ldLm9ubW91c2VvdmVyPWZ1bmN0aW9uICgpIHsNCiAgICAgICAgICAgIHZhciBub3RlaWQ9dGhpcy5wYXJlbnROb2RlLmlkOw0KICAgICAgICAgICAgdGhpcy5xdWVyeVNlbGVjdG9yKCdyZWN0Jykuc3R5bGUuZGlzcGxheT0nYmxvY2snOw0KICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiZ1tlZFxcOm5vdGVpZD0nIitub3RlaWQrIiddW25vdGVdIikuc3R5bGUuZGlzcGxheT0nYmxvY2snOw0KICAgICAgICB9Ow0KICAgICAgICBub3Rlc1tpXS5vbm1vdXNlb3V0PWZ1bmN0aW9uICgpIHsNCiAgICAgICAgICAgIHZhciBub3RlaWQ9dGhpcy5wYXJlbnROb2RlLmlkOw0KLy8gICAgICAgIHdpbmRvdy5nZXRTZWxlY3Rpb24oKS5yZW1vdmVBbGxSYW5nZXMoKTsNCiAgICAgICAgICAgIHRoaXMucXVlcnlTZWxlY3RvcigncmVjdCcpLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiZ1tlZFxcOm5vdGVpZD0nIitub3RlaWQrIiddW25vdGVdIikuc3R5bGUuZGlzcGxheT0nbm9uZSc7DQogICAgICAgIH0NCiAgICB9DQp9ZWxzZXsNCiAgICBjb25zb2xlLmxvZygn5oqx5q2J77yMSUXmtY/op4jlmajkuI3mlK/mjIFub3Rl6Kej5p6Q77yM6K+35L2/55So5YW25LuW5YaF5qC45rWP6KeI5Zmo44CC6LCi6LCi77yBJykNCn0NCi8vLS1ub3RlDQovL2h5cGVybGluay0tDQp2YXIgbGlua3M9ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnZz5nW2VkXFw6aHlwZXJsaW5rXScpOw0KZnVuY3Rpb24gZ2V0bWF4bGVuKGFycixicnIpIHsNCiAgICB2YXIgbD0wOw0KICAgIHZhciBsbD0wOw0KICAgIGZvcih2YXIgaj0wO2o8YXJyLmxlbmd0aDtqKyspew0KICAgICAgICB2YXIgZT1kb2N1bWVudC5jcmVhdGVFbGVtZW50TlMoJ2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJywndGV4dCcpOw0KICAgICAgICBpZighaXNOYU4obGlua2FycltqXSkpew0KICAgICAgICAgICAgZS50ZXh0Q29udGVudD0nUGFnZS0nK2FycltqXTsNCiAgICAgICAgfWVsc2V7DQogICAgICAgICAgICBlLnRleHRDb250ZW50PWFycltqXTsNCiAgICAgICAgfQ0KICAgICAgICBlLnN0eWxlLmZvbnRTaXplPScxMnB4JzsNCiAgICAgICAgZG9jdW1lbnQuYm9keS5nZXRFbGVtZW50c0J5VGFnTmFtZSgnc3ZnJylbMF0uYXBwZW5kQ2hpbGQoZSk7DQogICAgICAgIHZhciBldz1lLmdldEJCb3goKS53aWR0aDsNCiAgICAgICAgZG9jdW1lbnQuYm9keS5nZXRFbGVtZW50c0J5VGFnTmFtZSgnc3ZnJylbMF0ucmVtb3ZlQ2hpbGQoZSk7DQogICAgICAgIHZhciBoPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIGgudGV4dENvbnRlbnQ9YnJyW2pdOw0KICAgICAgICBoLnN0eWxlLmZvbnRTaXplPScxMnB4JzsNCiAgICAgICAgaC5zdHlsZS5mb250V2VpZ2h0PSdib2xkJzsNCiAgICAgICAgZG9jdW1lbnQuYm9keS5nZXRFbGVtZW50c0J5VGFnTmFtZSgnc3ZnJylbMF0uYXBwZW5kQ2hpbGQoaCk7DQogICAgICAgIHZhciBodz1oLmdldEJCb3goKS53aWR0aDsNCiAgICAgICAgZG9jdW1lbnQuYm9keS5nZXRFbGVtZW50c0J5VGFnTmFtZSgnc3ZnJylbMF0ucmVtb3ZlQ2hpbGQoaCk7DQogICAgICAgIGw9ZXc+aHc/ZXc6aHc7DQogICAgICAgIGxsPWw+bGw/bDpsbDsNCiAgICB9DQogICAgcmV0dXJuIGxsOw0KfQ0KZm9yKHZhciBpPTA7aTxsaW5rcy5sZW5ndGg7aSsrKXsNCiAgICB2YXIgcG9wdXA9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudE5TKCdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycsJ2cnKTsNCiAgICB2YXIgcG9wdXBSPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50TlMoJ2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJywncmVjdCcpOw0KICAgIHZhciBob3Zlcj1kb2N1bWVudC5jcmVhdGVFbGVtZW50TlMoJ2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJywncmVjdCcpOw0KICAgIHZhciBkZXNjYXJyPVtdOw0KICAgIHZhciBsaW5rYXJyPVtdOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnZmlsbCcsJyNjZGNkZmYnKTsNCiAgICBob3Zlci5zZXRBdHRyaWJ1dGUoJ3gnLCcwJyk7DQogICAgaG92ZXIuc2V0QXR0cmlidXRlKCd5JywnMCcpOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgnaGVpZ2h0JywnMTYnKTsNCiAgICBob3Zlci5zZXRBdHRyaWJ1dGUoJ3dpZHRoJywnMTYnKTsNCiAgICBob3Zlci5zZXRBdHRyaWJ1dGUoJ2ZpbGwtb3BhY2l0eScsJzAuNicpOw0KICAgIGhvdmVyLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJyxsaW5rc1tpXS5xdWVyeVNlbGVjdG9yKCd1c2UnKS5nZXRBdHRyaWJ1dGUoJ3RyYW5zZm9ybScpKTsNCiAgICBob3Zlci5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICBsaW5rc1tpXS5hcHBlbmRDaGlsZChob3Zlcik7DQogICAgLy8gY29uc29sZS5sb2cobGlua3NbaV0uZ2V0QXR0cmlidXRlKCdlZDpoeXBlcmxpbmsnKSk7DQogICAgdmFyIGE9SlNPTi5wYXJzZShsaW5rc1tpXS5nZXRBdHRyaWJ1dGUoJ2VkOmh5cGVybGluaycpKTsNCiAgICB2YXIgY3M9bGlua3NbaV0ucXVlcnlTZWxlY3RvcigndXNlJykuZ2V0QXR0cmlidXRlKCd0cmFuc2Zvcm0nKS5tYXRjaCgvXCgoXFMqfFxTKlxzXFMqKVwpLylbMV0uc3BsaXQoLyB8LC8pOw0KICAgIHZhciBwcz1saW5rc1tpXS5wYXJlbnROb2RlLmdldEF0dHJpYnV0ZSgndHJhbnNmb3JtJyk7DQogICAgaWYocHMuc3Vic3RyKDAsMikgPT0gJ3RyJyl7DQogICAgICAgIHZhciBwcHMgPSBwcy5tYXRjaCgvXCgoXFMqfFxTKlxzXFMqKVwpLylbMV0uc3BsaXQoLyB8LC8pOw0KICAgICAgICB2YXIgeD1wYXJzZUZsb2F0KGNzWzBdKStwYXJzZUZsb2F0KHBwc1swXSk7DQogICAgICAgIHZhciB5PXBhcnNlRmxvYXQocHBzWzFdKTsNCiAgICAgICAgeD14LnRvc3VpdHN2ZygpOw0KICAgICAgICB5PXkudG9zdWl0c3ZnKCk7DQogICAgICAgIHZhciB0cnN0ciA9ICd0cmFuc2xhdGUoJyt4KycsJyt5KycpJzsNCiAgICB9ZWxzZSBpZihwcy5zdWJzdHIoMCwyKSA9PSAnbWEnKXsNCiAgICAgICAgdmFyIHBwcyA9IHBzLm1hdGNoKC8oXC0/XGQrKFwuXGQrKT8pW1wsIF0oXC0/XGQrKFwuXGQrKT8pW1wsIF0oXC0/XGQrKFwuXGQrKT8pW1wsIF0oXC0/XGQrKFwuXGQrKT8pW1wsIF0oXC0/XGQrKFwuXGQrKT8pW1wsIF0oXC0/XGQrKFwuXGQrKT8pXCkkLyk7DQogICAgICAgIHZhciBtYUFyciA9IFtwYXJzZUZsb2F0KHBwc1sxXSkscGFyc2VGbG9hdChwcHNbM10pLHBhcnNlRmxvYXQocHBzWzVdKSxwYXJzZUZsb2F0KHBwc1s3XSkscGFyc2VGbG9hdChwcHNbOV0pLHBhcnNlRmxvYXQocHBzWzExXSldOw0KICAgICAgICBpZihtYUFyclsxXSA9PSAwKXsNCiAgICAgICAgICAgIHZhciB4ID0gcGFyc2VGbG9hdChjc1swXSk7DQogICAgICAgICAgICB2YXIgeSA9IHBhcnNlRmxvYXQoY3NbMV0pKzE2Ow0KICAgICAgICAgICAgdmFyIHgxID0geCAqIG1hQXJyWzBdICsgeSAqIG1hQXJyWzJdICsgbWFBcnJbNF07DQogICAgICAgICAgICB2YXIgeTEgPSB4ICogbWFBcnJbMV0gKyB5ICogbWFBcnJbM10gKyBtYUFycls1XTsNCiAgICAgICAgICAgIHgxPXgxLnRvc3VpdHN2ZygpOw0KICAgICAgICAgICAgeTE9eTEudG9zdWl0c3ZnKCk7DQogICAgICAgICAgICB2YXIgdHJzdHIgPSAgJ3RyYW5zbGF0ZSgnK3gxKycsJyt5MSsnKSc7DQogICAgICAgIH1lbHNlew0KICAgICAgICAgICAgdmFyIHggPSBwYXJzZUZsb2F0KGNzWzBdKSsxNjsNCiAgICAgICAgICAgIHZhciB5ID0gcGFyc2VGbG9hdChjc1sxXSkrMTY7DQogICAgICAgICAgICB2YXIgeDEgPSB4ICogbWFBcnJbMF0gKyB5ICogbWFBcnJbMl0gKyBtYUFycls0XTsNCiAgICAgICAgICAgIHZhciB5MSA9IHggKiBtYUFyclsxXSArIHkgKiBtYUFyclszXSArIG1hQXJyWzVdOw0KICAgICAgICAgICAgeCA9IHBhcnNlRmxvYXQoY3NbMF0pKzE2Ow0KICAgICAgICAgICAgeSA9IHBhcnNlRmxvYXQoY3NbMV0pOw0KICAgICAgICAgICAgdmFyIHgyID0geCAqIG1hQXJyWzBdICsgeSAqIG1hQXJyWzJdICsgbWFBcnJbNF07DQogICAgICAgICAgICB2YXIgeTIgPSB4ICogbWFBcnJbMV0gKyB5ICogbWFBcnJbM10gKyBtYUFycls1XTsNCiAgICAgICAgICAgIHZhciBmeCA9IHgxPHgyP3gxLnRvc3VpdHN2ZygpOiB4Mi50b3N1aXRzdmcoKTsNCiAgICAgICAgICAgIHZhciBmeSA9IHkxPnkyP3kxLnRvc3VpdHN2ZygpOiB5Mi50b3N1aXRzdmcoKTsNCgkJCXZhciBvZmZ5ID0gTWF0aC5hYnMoeTEteTIpOwkJCQkJCQkJCQkgIA0KICAgICAgICAgICAgdmFyIHRyc3RyID0gICd0cmFuc2xhdGUoJytmeCsnLCcrZnkrJyknOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgnaGVpZ2h0JyxvZmZ5LnRvU3RyaW5nKCkpOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgnd2lkdGgnLCcxNicpOw0KICAgICAgICAgICAgcG9wdXBSLnNldEF0dHJpYnV0ZSgneScsKC1vZmZ5KS50b1N0cmluZygpKTsNCiAgICAgICAgICAgIHBvcHVwUi5zZXRBdHRyaWJ1dGUoJ2ZpbGwnLCd0cmFuc3BhcmVudCcpOw0KICAgICAgICAgICAgcG9wdXAuYXBwZW5kQ2hpbGQocG9wdXBSKTsNCiAgICAgICAgfQ0KICAgIH0NCiAgICB2YXIgYWw9YS5sZW5ndGg7DQogICAgZm9yKHZhciBqPTA7ajxhbDtqKyspew0KICAgICAgICBsaW5rYXJyLnB1c2goYVtqXS5saW5rKTsNCiAgICAgICAgZGVzY2Fyci5wdXNoKGFbal0uZGVzYyk7DQogICAgfQ0KICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgndHJhbnNmb3JtJyx0cnN0cik7DQogICAgdmFyIG1heD1nZXRtYXhsZW4obGlua2FycixkZXNjYXJyKTsNCiAgICBmb3IodmFyIGs9MDtrPGFsO2srKyl7DQogICAgICAgIHZhciBjPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdhJyk7DQogICAgICAgIHZhciBkPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCdyZWN0Jyk7DQogICAgICAgIHZhciBlPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIHZhciBmPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUygnaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLCd0ZXh0Jyk7DQogICAgICAgIGlmKGlzTmFOKGxpbmthcnJba10pKXsNCiAgICAgICAgICAgIGMuc2V0QXR0cmlidXRlTlMoImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiwgInhsaW5rIiwgImh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiKTsNCiAgICAgICAgICAgIGMuc2V0QXR0cmlidXRlTlMoImh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiLCAiaHJlZiIsIGxpbmthcnJba10pOw0KICAgICAgICAgICAgYy5zZXRBdHRyaWJ1dGUoJ3RhcmdldCcsJ19ibGFuaycpOw0KICAgICAgICAgICAgZS50ZXh0Q29udGVudD1saW5rYXJyW2tdOw0KICAgICAgICB9ZWxzZXsNCiAgICAgICAgICAgIGUudGV4dENvbnRlbnQ9J1BhZ2UtJytsaW5rYXJyW2tdOw0KICAgICAgICAgICAgYy5zZXRBdHRyaWJ1dGVOUygiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLCAieGxpbmsiLCAiaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIpOw0KICAgICAgICAgICAgYy5zZXRBdHRyaWJ1dGVOUygiaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIsICJocmVmIiwgIiMiK2xpbmthcnJba10pOw0KICAgICAgICB9DQogICAgICAgIGQuc2V0QXR0cmlidXRlKCd3aWR0aCcsbWF4KzEwKTsNCiAgICAgICAgZC5zZXRBdHRyaWJ1dGUoJ2hlaWdodCcsJzMzJyk7DQogICAgICAgIGQuc2V0QXR0cmlidXRlKCdzdHJva2UnLCcjOTk5OTk5Jyk7DQogICAgICAgIGQuc2V0QXR0cmlidXRlKCdmaWxsJywnd2hpdGUnKTsNCiAgICAgICAgZC5zZXRBdHRyaWJ1dGUoJ3knLDMzKmspOw0KICAgICAgICBmLnRleHRDb250ZW50PWRlc2NhcnJba107DQogICAgICAgIGYuc3R5bGUuZm9udFNpemU9JzEycHgnOw0KICAgICAgICBmLnN0eWxlLmZvbnRXZWlnaHQ9J2JvbGQnOw0KICAgICAgICBmLnNldEF0dHJpYnV0ZSgneCcsNSk7DQogICAgICAgIGYuc2V0QXR0cmlidXRlKCd5JywzMyprKzEyKTsNCiAgICAgICAgZS5zdHlsZS5mb250U2l6ZT0nMTJweCc7DQogICAgICAgIGUuc2V0QXR0cmlidXRlKCd5JywzMyprKzI4KTsNCiAgICAgICAgZS5zZXRBdHRyaWJ1dGUoJ3gnLDUpOw0KICAgICAgICBjLmFwcGVuZENoaWxkKGQpOw0KICAgICAgICBjLmFwcGVuZENoaWxkKGYpOw0KICAgICAgICBjLmFwcGVuZENoaWxkKGUpOw0KICAgICAgICBjLm9ubW91c2VvdmVyPWZ1bmN0aW9uICgpIHsNCiAgICAgICAgICAgIHRoaXMucXVlcnlTZWxlY3RvcigncmVjdCcpLnN0eWxlLmZpbGw9JyNlMWUxZmYnDQogICAgICAgIH07DQogICAgICAgIGMub25tb3VzZW91dD1mdW5jdGlvbiAoKSB7DQogICAgICAgICAgICB0aGlzLnF1ZXJ5U2VsZWN0b3IoJ3JlY3QnKS5zdHlsZS5maWxsPSd3aGl0ZScNCiAgICAgICAgfTsNCiAgICAgICAgcG9wdXAuYXBwZW5kQ2hpbGQoYyk7DQogICAgfQ0KICAgIHBvcHVwLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgIHBvcHVwLnNldEF0dHJpYnV0ZSgnaHlwZXJsaW5rJywnJyk7DQogICAgcG9wdXAuc2V0QXR0cmlidXRlKCdlZDpsaW5raWQnLGxpbmtzW2ldLnBhcmVudE5vZGUuaWQpOw0KICAgIHBvcHVwLm9ubW91c2VvdmVyPWZ1bmN0aW9uICgpIHsNCiAgICAgICAgdGhpcy5zdHlsZS5kaXNwbGF5PSdibG9jayc7DQogICAgfTsNCiAgICBwb3B1cC5vbmNsaWNrPWZ1bmN0aW9uICgpIHsNCiAgICAgICAgdGhpcy5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICB9Ow0KICAgIHBvcHVwLm9ubW91c2VvdXQ9ZnVuY3Rpb24gKCkgew0KICAgICAgICB0aGlzLnN0eWxlLmRpc3BsYXk9J25vbmUnOw0KICAgIH07DQogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3N2Zy1jb250YWluZXIgPiBzdmcnKS5hcHBlbmRDaGlsZChwb3B1cCk7DQogICAgbGlua3NbaV0ub25tb3VzZW92ZXI9ZnVuY3Rpb24gKCkgew0KICAgICAgICB2YXIgbGlua2lkPXRoaXMucGFyZW50Tm9kZS5pZDsNCiAgICAgICAgdGhpcy5xdWVyeVNlbGVjdG9yKCdyZWN0Jykuc3R5bGUuZGlzcGxheT0nYmxvY2snOw0KICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCJnW2VkXFw6bGlua2lkPSciK2xpbmtpZCsiJ11baHlwZXJsaW5rXSIpLnN0eWxlLmRpc3BsYXk9J2Jsb2NrJzsNCiAgICB9DQogICAgbGlua3NbaV0ub25tb3VzZW91dD1mdW5jdGlvbiAoKSB7DQogICAgICAgIHZhciBsaW5raWQ9dGhpcy5wYXJlbnROb2RlLmlkOw0KICAgICAgICB0aGlzLnF1ZXJ5U2VsZWN0b3IoJ3JlY3QnKS5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiZ1tlZFxcOmxpbmtpZD0nIitsaW5raWQrIiddW2h5cGVybGlua10iKS5zdHlsZS5kaXNwbGF5PSdub25lJzsNCiAgICB9DQp9DQovLy0taHlwZXJsaW5rDQovL2luaXRpYWxpemUtLQ0KdmFyIHNoYXBlPWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ2dbZWRcXDp0b2d0b3BpY2lkXScpOw0KdmFyIG1JZD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdnW2VkXFw6dG9waWN0eXBlXScpOw0KdmFyIGRhdGFUcmVlPXt9Ow0KdmFyIGV4dHJhUmVsYT17fTsNCnZhciBjaGVja0lEPScnOw0KZm9yKHZhciBpPTA7aTxtSWQubGVuZ3RoO2krKyl7DQogICAgdmFyIHR5cGU9bUlkW2ldLmdldEF0dHJpYnV0ZSgnZWQ6dG9waWN0eXBlJyk7DQogICAgdmFyIHNpZD1tSWRbaV0uaWQ7DQogICAgaWYodHlwZSE9PSdjYWxsb3V0Jyl7DQogICAgICAgIGluaXQoc2lkLGRhdGFUcmVlKQ0KICAgIH0NCn0NCmZ1bmN0aW9uIGluaXQoaWQsIG9iaikgew0KICAgIHZhciBjaGlsZHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJnW2VkXFw6cGFyZW50aWQ9JyIgKyBpZCArICInXTpub3QoW2VkXFw6dG9waWN0eXBlXSkiKTsNCiAgICB2YXIgY2FsbHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJnW2VkXFw6cGFyZW50aWQ9JyIgKyBpZCArICInXVtlZFxcOnRvcGljdHlwZV0iKTsNCiAgICB2YXIgc3VtbWFyeSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoInBhdGhbZWRcXDpwYXJlbnRpZCo9JyIgKyBpZCArICInXVtlZFxcOnR5cGU9J3N1bW1hcnknXSIpOw0KICAgIHZhciBib3VuZGFyeT0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgicGF0aFtlZFxcOnBhcmVudGlkKj0nIiArIGlkICsgIiddW2VkXFw6dHlwZT0nYm91bmRhcnknXSIpOw0KICAgIHZhciByZWxhZnJvbT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJnW2VkXFw6ZnJvbWlkKj0nIiArIGlkICsgIiddW2VkXFw6dHlwZT0ncmVsYXRpb24nXSIpOw0KICAgIHZhciByZWxhdG89ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiZ1tlZFxcOnRvaWQqPSciICsgaWQgKyAiJ11bZWRcXDp0eXBlPSdyZWxhdGlvbiddIik7DQogICAgb2JqWyJtIiArIGlkXSA9IHt9Ow0KICAgIHZhciB0eXBlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaWQpLmdldEF0dHJpYnV0ZSgnZWQ6dG9waWN0eXBlJyk7DQogICAgdmFyIGl3PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGlkKS5nZXRBdHRyaWJ1dGUoJ2VkOndpZHRoJyk7DQogICAgdmFyIGloPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGlkKS5nZXRBdHRyaWJ1dGUoJ2VkOmhlaWdodCcpOw0KICAgIGlmICh0eXBlKSB7DQogICAgICAgIG9ialsibSIgKyBpZF0udHlwZSA9IHR5cGU7DQogICAgfQ0KICAgIGlmKGl3JiZpaCl7DQogICAgICAgIG9ialsibSIgKyBpZF0ud2lkdGggPWl3Ow0KICAgICAgICBvYmpbIm0iICsgaWRdLmhlaWdodCA9aWg7DQogICAgfQ0KICAgIGlmIChyZWxhZnJvbS5sZW5ndGggIT09IDApIHsNCiAgICAgICAgb2JqWyJtIiArIGlkXS5yZWxhZnJvbSA9IHt9Ow0KICAgICAgICBmb3IgKHZhciBpID0gMDsgaSA8IHJlbGFmcm9tLmxlbmd0aDsgaSsrKSB7DQogICAgICAgICAgICB2YXIgaW5kZXhpZCA9IHJlbGFmcm9tW2ldLmlkOw0KICAgICAgICAgICAgdmFyIHRvaWQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChpbmRleGlkKS5nZXRBdHRyaWJ1dGUoJ2VkOnRvaWQnKTsNCiAgICAgICAgICAgIGlmIChleHRyYVJlbGFbaW5kZXhpZF0gPT09IHVuZGVmaW5lZCkgew0KICAgICAgICAgICAgICAgIGV4dHJhUmVsYVtpbmRleGlkXSA9IHsNCiAgICAgICAgICAgICAgICAgICAgaWQ6IGluZGV4aWQsDQogICAgICAgICAgICAgICAgICAgIGZyb21pZDogaWQsDQogICAgICAgICAgICAgICAgICAgIHRvaWQ6IHRvaWQsDQogICAgICAgICAgICAgICAgICAgIGlzQzogZmFsc2UNCiAgICAgICAgICAgICAgICB9Ow0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgb2JqWyJtIiArIGlkXS5yZWxhZnJvbVtpbmRleGlkXT17fTsNCiAgICAgICAgICAgIG9ialsibSIgKyBpZF0ucmVsYWZyb20uZGlzcGxheT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChpZCkuc3R5bGUuZGlzcGxheSAhPT0gJ25vbmUnPydibG9jayc6J25vbmUnOw0KICAgICAgICB9DQogICAgfQ0KICAgIGlmIChyZWxhdG8ubGVuZ3RoICE9PSAwKSB7DQogICAgICAgIG9ialsibSIgKyBpZF0ucmVsYXRvID0ge307DQogICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgcmVsYXRvLmxlbmd0aDsgaSsrKSB7DQogICAgICAgICAgICB2YXIgaW5kZXhpZD1yZWxhdG9baV0uaWQ7DQogICAgICAgICAgICB2YXIgZnJvbWlkPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGluZGV4aWQpLmdldEF0dHJpYnV0ZSgnZWQ6ZnJvbWlkJyk7DQogICAgICAgICAgICBpZihleHRyYVJlbGFbaW5kZXhpZF0gPT09IHVuZGVmaW5lZCl7DQogICAgICAgICAgICAgICAgZXh0cmFSZWxhW2luZGV4aWRdPXsNCiAgICAgICAgICAgICAgICAgICAgaWQ6aW5kZXhpZCwNCiAgICAgICAgICAgICAgICAgICAgZnJvbWlkOmZyb21pZCwNCiAgICAgICAgICAgICAgICAgICAgdG9pZDppZCwNCiAgICAgICAgICAgICAgICAgICAgaXNDOmZhbHNlDQogICAgICAgICAgICAgICAgfTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgICAgIG9ialsibSIgKyBpZF0ucmVsYXRvW2luZGV4aWRdPXt9Ow0KICAgICAgICAgICAgb2JqWyJtIiArIGlkXS5yZWxhdG8uZGlzcGxheT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChpZCkuc3R5bGUuZGlzcGxheSAhPT0gJ25vbmUnPydibG9jayc6J25vbmUnOw0KICAgICAgICB9DQogICAgfQ0KICAgIGlmIChjaGlsZHMubGVuZ3RoICE9PSAwKSB7DQogICAgICAgIG9ialsibSIgKyBpZF0uY2hpbGQgPSB7fTsNCiAgICAgICAgaWYgKGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoImdbZWRcXDp0b2d0b3BpY2lkPSciICsgaWQgKyAiJ10iKSkgew0KICAgICAgICAgICAgLy8gY29uc29sZS5sb2coZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiZ1tlZFxcOnRvZ3RvcGljaWQ9JyIgKyBpZCArICInXSIpLmNoaWxkTm9kZXNbMF0uZ2V0QXR0cmlidXRlKCd4bGluazpocmVmJykpOw0KICAgICAgICAgICAgdmFyIHRvZyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoImdbZWRcXDp0b2d0b3BpY2lkPSciICsgaWQgKyAiJ10iKS5nZXRFbGVtZW50c0J5VGFnTmFtZSgndXNlJylbMF0uZ2V0QXR0cmlidXRlKCd4bGluazpocmVmJykuc2xpY2UoMSk7DQogICAgICAgICAgICBvYmpbIm0iICsgaWRdLnRvZ3R5cGUgPSB0b2c7DQogICAgICAgIH0NCiAgICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBjaGlsZHMubGVuZ3RoOyBpKyspIHsNCiAgICAgICAgICAgIHZhciBjaWQgPSBjaGlsZHNbaV0uaWQ7DQogICAgICAgICAgICBpbml0KGNpZCwgb2JqWyJtIiArIGlkXS5jaGlsZCk7DQogICAgICAgIH0NCiAgICB9DQogICAgaWYgKGNhbGxzLmxlbmd0aCAhPT0gMCkgew0KICAgICAgICBvYmpbIm0iICsgaWRdLmNhbGwgPSB7fTsNCiAgICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBjYWxscy5sZW5ndGg7IGkrKykgew0KICAgICAgICAgICAgdmFyIGNpZCA9IGNhbGxzW2ldLmlkOw0KICAgICAgICAgICAgaW5pdChjaWQsIG9ialsibSIgKyBpZF0uY2FsbCk7DQogICAgICAgIH0NCiAgICB9DQogICAgaWYgKGJvdW5kYXJ5Lmxlbmd0aCAhPT0gMCkgew0KICAgICAgICBvYmpbIm0iICsgaWRdLmJvdW5kYXJ5ID0ge307DQogICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgYm91bmRhcnkubGVuZ3RoOyBpKyspIHsNCiAgICAgICAgICAgIHZhciBjaWQgPWJvdW5kYXJ5W2ldLmlkOw0KICAgICAgICAgICAgaW5pdChjaWQsIG9ialsibSIgKyBpZF0uYm91bmRhcnkpOw0KICAgICAgICB9DQogICAgfQ0KICAgIGlmIChzdW1tYXJ5Lmxlbmd0aCAhPT0gMCkgew0KICAgICAgICBvYmpbIm0iICsgaWRdLnN1bW1hcnkgPSB7fTsNCiAgICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBzdW1tYXJ5Lmxlbmd0aDsgaSsrKSB7DQogICAgICAgICAgICB2YXIgY2lkID0gc3VtbWFyeVtpXS5pZDsNCiAgICAgICAgICAgIGluaXQoY2lkLCBvYmpbIm0iICsgaWRdLnN1bW1hcnkpOw0KICAgICAgICB9DQogICAgfQ0KfQ0KLy8tLWluaXRpYWxpemUNCi8vdG9nZ2xlZGlzcGxheS0tDQp2YXIgY2hhaW5BcnI9W107DQpmdW5jdGlvbiBnZXRjaGFpbihpZCl7DQogICAgY2hhaW5BcnIudW5zaGlmdCgnbScraWQpOw0KICAgIHZhciBwYXJlbnQ9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaWQpLmdldEF0dHJpYnV0ZSgnZWQ6cGFyZW50aWQnKTsNCiAgICBpZighcGFyZW50KXsNCiAgICAgICAgcmV0dXJuOw0KICAgIH0NCglpZihwYXJlbnQubWF0Y2goL1wsLykpew0KICAgICAgICBwYXJlbnQgPSBwYXJlbnQubWF0Y2goL1xkKyg/PVwsKS8pWzBdDQogICAgfQ0KICAgIGdldGNoYWluKHBhcmVudCk7DQp9DQpmdW5jdGlvbiBnZXRvYmooaWQpIHsNCiAgICBjaGFpbkFycj1bXTsNCiAgICBnZXRjaGFpbihpZCk7DQogICAgdmFyIG1haW49Y2hhaW5BcnJbMF07DQogICAgaWYoY2hhaW5BcnIubGVuZ3RoPjEpew0KICAgICAgICB2YXIgb2JqPWRhdGFUcmVlW21haW5dOw0KICAgICAgICAvLyBjb25zb2xlLmxvZyhjaGFpbkFycik7DQogICAgICAgIGZvcih2YXIgaT0xO2k8Y2hhaW5BcnIubGVuZ3RoO2krKykgew0KICAgICAgICAgICAgdmFyIGEgPSBjaGFpbkFycltpXTsNCiAgICAgICAgICAgIGZvcih2YXIgaj0wO2o8T2JqZWN0LmtleXMob2JqKS5sZW5ndGg7aisrKXsNCiAgICAgICAgICAgICAgICB2YXIgY29iaj0gb2JqW09iamVjdC5rZXlzKG9iailbal1dW2FdOw0KICAgICAgICAgICAgICAgIGlmKGNvYmopew0KICAgICAgICAgICAgICAgICAgICBvYmo9Y29iajsNCiAgICAgICAgICAgICAgICAgICAgY29udGludWUNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9DQogICAgICAgIH0NCiAgICAgICAgcmV0dXJuIG9iag0KICAgIH1lbHNlew0KICAgICAgICB2YXIgb2JqPWRhdGFUcmVlW21haW5dOw0KICAgICAgICByZXR1cm4gb2JqDQogICAgfQ0KDQp9DQpmb3IodmFyIGk9MDtpPHNoYXBlLmxlbmd0aDtpKyspew0KICAgIHNoYXBlW2ldLm9uY2xpY2s9ZnVuY3Rpb24gKCkgew0KICAgICAgICB2YXIgaWQ9TnVtYmVyKHRoaXMuZ2V0QXR0cmlidXRlKCdlZDp0b2d0b3BpY2lkJykpOw0KICAgICAgICB2YXIgb2JqPWdldG9iaihpZCk7DQoNCiAgICAgICAgdmFyIHR5cGU9b2JqLnRvZ3R5cGU9PT0nbWludXMnPydwbHVzJzonbWludXMnOw0KICAgICAgICB2YXIgZGlzcGxheT1vYmoudG9ndHlwZT09PSdtaW51cyc/J25vbmUnOidibG9jayc7DQogICAgICAgIHRoaXMuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ3VzZScpWzBdLnNldEF0dHJpYnV0ZSgneGxpbms6aHJlZicsJyMnK3R5cGUpOw0KICAgICAgICBvYmoudG9ndHlwZT10eXBlOw0KICAgICAgICBjaGVja0lEPW9iajsNCg0KICAgICAgICB1dGQob2JqLGlkLGRpc3BsYXkpOw0KICAgICAgICBleHRyYVJlbGFGaW4oKTsNCiAgICB9DQp9DQpmdW5jdGlvbiB1dGQob2JqLGlkLHNob3csb2MpIHsNCg0KICAgIHZhciBwc2hvdz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChpZCkuc3R5bGUuZGlzcGxheSE9PSAnbm9uZSc/J2Jsb2NrJzonbm9uZSc7DQogICAgaWYgKG9iai5yZWxhZnJvbSl7DQogICAgICAgIGlmKG9iai5yZWxhZnJvbS5kaXNwbGF5IT09IHBzaG93KXsNCiAgICAgICAgICAgIHZhciByZWxhZnJvbXM9T2JqZWN0LmtleXMob2JqLnJlbGFmcm9tKTsNCiAgICAgICAgICAgIHJlbGFmcm9tcy5zcGxpY2UocmVsYWZyb21zLmluZGV4T2YoJ2Rpc3BsYXknKSwxKTsNCiAgICAgICAgICAgIGZvcih2YXIgaz0wO2s8cmVsYWZyb21zLmxlbmd0aDtrKyspew0KICAgICAgICAgICAgICAgIHZhciBkPXJlbGFmcm9tc1trXTsNCiAgICAgICAgICAgICAgICBleHRyYVJlbGFbZF0uaXNDPXRydWU7DQogICAgICAgICAgICB9DQogICAgICAgICAgICBvYmoucmVsYWZyb20uZGlzcGxheSA9IHBzaG93Ow0KICAgICAgICB9DQogICAgfQ0KICAgIGlmIChvYmoucmVsYXRvKXsNCiAgICAgICAgaWYob2JqLnJlbGF0by5kaXNwbGF5IT09IHBzaG93KXsNCiAgICAgICAgICAgIHZhciByZWxhdG9zPU9iamVjdC5rZXlzKG9iai5yZWxhdG8pOw0KICAgICAgICAgICAgcmVsYXRvcy5zcGxpY2UocmVsYXRvcy5pbmRleE9mKCdkaXNwbGF5JyksMSk7DQogICAgICAgICAgICBmb3IodmFyIGs9MDtrPHJlbGF0b3MubGVuZ3RoO2srKyl7DQogICAgICAgICAgICAgICAgdmFyIGQ9cmVsYXRvc1trXTsNCiAgICAgICAgICAgICAgICBleHRyYVJlbGFbZF0uaXNDPXRydWU7DQogICAgICAgICAgICB9DQogICAgICAgICAgICBvYmoucmVsYXRvLmRpc3BsYXkgPSBwc2hvdzsNCiAgICAgICAgfQ0KICAgIH0NCiAgICBpZihvYmouY2FsbCl7DQogICAgICAgIHZhciBjYWxscz1PYmplY3Qua2V5cyhvYmouY2FsbCk7DQogICAgICAgIGlmKGNoZWNrSUQhPT1vYmopew0KICAgICAgICAgICAgZm9yKHZhciBpPTA7aSA8IGNhbGxzLmxlbmd0aDtpKyspew0KICAgICAgICAgICAgICAgIHZhciBhPWNhbGxzW2ldLnNsaWNlKDEpOw0KICAgICAgICAgICAgICAgIHZhciBiPW9iai5jYWxsW2NhbGxzW2ldXTsNCiAgICAgICAgICAgICAgICB2YXIgYz1iLnRvZ3R5cGU7DQogICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoYSkuc3R5bGUuZGlzcGxheT1zaG93Ow0KICAgICAgICAgICAgICAgIGlmIChiLnJlbGFmcm9tJiYhYyl7DQogICAgICAgICAgICAgICAgICAgIGlmKGIucmVsYWZyb20uZGlzcGxheSE9PSBzaG93KXsNCiAgICAgICAgICAgICAgICAgICAgICAgIHZhciByZWxhZnJvbXM9T2JqZWN0LmtleXMoYi5yZWxhZnJvbSk7DQogICAgICAgICAgICAgICAgICAgICAgICByZWxhZnJvbXMuc3BsaWNlKHJlbGFmcm9tcy5pbmRleE9mKCdkaXNwbGF5JyksMSk7DQogICAgICAgICAgICAgICAgICAgICAgICBmb3IodmFyIGs9MDtrPHJlbGFmcm9tcy5sZW5ndGg7aysrKXsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YXIgZD1yZWxhZnJvbXNba107DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgZXh0cmFSZWxhW2RdLmlzQz10cnVlOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgYi5yZWxhZnJvbS5kaXNwbGF5ID0gc2hvdzsNCiAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICBpZiAoYi5yZWxhdG8mJiFjKXsNCiAgICAgICAgICAgICAgICAgICAgaWYoYi5yZWxhdG8uZGlzcGxheSE9PSBzaG93KXsNCiAgICAgICAgICAgICAgICAgICAgICAgIHZhciByZWxhdG9zPU9iamVjdC5rZXlzKGIucmVsYXRvKTsNCiAgICAgICAgICAgICAgICAgICAgICAgIHJlbGF0b3Muc3BsaWNlKHJlbGF0b3MuaW5kZXhPZignZGlzcGxheScpLDEpOw0KICAgICAgICAgICAgICAgICAgICAgICAgZm9yKHZhciBrPTA7azxyZWxhdG9zLmxlbmd0aDtrKyspew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhciBkPXJlbGF0b3Nba107DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgZXh0cmFSZWxhW2RdLmlzQz10cnVlOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgYi5yZWxhdG8uZGlzcGxheSA9IHNob3c7DQogICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgaWYoYyl7DQogICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoImdbZWRcXDp0b2d0b3BpY2lkPSciK2ErIiddIikuc3R5bGUuZGlzcGxheT1zaG93Ow0KICAgICAgICAgICAgICAgICAgICBpZihjPT09J21pbnVzJyl7DQogICAgICAgICAgICAgICAgICAgICAgICB1dGQoYixhLHNob3cpDQogICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgaWYgKChiLmNhbGx8fGIuYm91bmRhcnl8fGIuc3VtbWFyeSkmJmM9PT0ncGx1cycpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdyx0cnVlKQ0KICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIGlmKGIuY2FsbCYmIWMpIHsNCiAgICAgICAgICAgICAgICAgICAgdXRkKGIsYSxzaG93LHRydWUpDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIGlmIChiLnN1bW1hcnkmJiFjKSB7DQogICAgICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdykNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgaWYgKGIuYm91bmRhcnkmJiFjKSB7DQogICAgICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdykNCiAgICAgICAgICAgICAgICB9DQoNCiAgICAgICAgICAgIH0NCiAgICAgICAgfQ0KICAgIH0NCiAgICBpZihvYmouc3VtbWFyeSl7DQogICAgICAgIHZhciBzdW1tYXJ5cz1PYmplY3Qua2V5cyhvYmouc3VtbWFyeSk7DQogICAgICAgIGlmKChjaGVja0lEIT09b2JqJiYob2JqLnRvZ3R5cGU9PT0nbWludXMnfHwhb2JqLnRvZ3R5cGUpKXx8Y2hlY2tJRD09PW9iail7DQogICAgICAgICAgICBmb3IodmFyIGk9MDtpPHN1bW1hcnlzLmxlbmd0aDtpKyspew0KICAgICAgICAgICAgICAgIHZhciBhPXN1bW1hcnlzW2ldLnNsaWNlKDEpOw0KCQkJCXZhciBvc3AgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChhKS5nZXRBdHRyaWJ1dGUoJ2VkOnBhcmVudGlkJyk7DQogICAgICAgICAgICAgICAgaWYob3NwLm1hdGNoKC9cLC8pKXsNCiAgICAgICAgICAgICAgICAgICAgdmFyIG9zcGEgPSBvc3Auc3BsaXQoJywnKTsNCiAgICAgICAgICAgICAgICAgICAgdmFyIG9zcEw9MDsNCg0KICAgICAgICAgICAgICAgICAgICBmb3IodmFyIGo9MDtqPG9zcGEubGVuZ3RoO2orKyl7DQogICAgICAgICAgICAgICAgICAgICAgICBpZihzaG93ID09ICdub25lJyl7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQob3NwYVtqXSkuc3R5bGUuZGlzcGxheSAhPSAnbm9uZScpew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9ZWxzZXsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3NwTCsrOw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgIH1lbHNlew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZihkb2N1bWVudC5nZXRFbGVtZW50QnlJZChhKS5zdHlsZS5kaXNwbGF5ICE9ICdub25lJyl7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfWVsc2V7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvc3BMKys7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgIH0NCg0KICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgICAgIGlmKG9zcEwgIT09IG9zcGEubGVuZ3RoKXsNCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOw0KICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIHZhciBiPW9iai5zdW1tYXJ5W3N1bW1hcnlzW2ldXTsNCiAgICAgICAgICAgICAgICAvLyBjb25zb2xlLmxvZyhhKTsNCiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChhKS5zdHlsZS5kaXNwbGF5PXNob3c7DQovLyAgICAgICAgICAgICAgICBpZihjKXsNCi8vICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCJnW2VkXFw6dG9ndG9waWNpZD0nIithKyInXSIpLnN0eWxlLmRpc3BsYXk9c2hvdzsNCi8vICAgICAgICAgICAgICAgICAgICBpZihjPT09J21pbnVzJyl7DQovLyAgICAgICAgICAgICAgICAgICAgICAgIHV0ZChiLHNob3cpDQovLyAgICAgICAgICAgICAgICAgICAgfQ0KLy8gICAgICAgICAgICAgICAgICAgIGlmIChiLmNhbGwmJmM9PT0ncGx1cycpIHsNCi8vICAgICAgICAgICAgICAgICAgICAgICAgdXRkKGIsc2hvdyx0cnVlKQ0KLy8gICAgICAgICAgICAgICAgICAgIH0NCi8vICAgICAgICAgICAgICAgIH0NCi8vICAgICAgICAgICAgICAgIGlmKGIuY2FsbCYmIWMpIHsNCi8vICAgICAgICAgICAgICAgICAgICB1dGQoYixzaG93LHRydWUpDQovLyAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgaWYoT2JqZWN0LmtleXMoYikubGVuZ3RoIT09MCl7DQogICAgICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdykNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9DQogICAgICAgIH0NCiAgICB9DQogICAgaWYob2JqLmJvdW5kYXJ5KXsNCiAgICAgICAgdmFyIGJvdW5kYXJ5cz1PYmplY3Qua2V5cyhvYmouYm91bmRhcnkpOw0KICAgICAgICBpZihjaGVja0lEIT09b2JqKXsNCiAgICAgICAgICAgIGZvcih2YXIgaT0wO2k8Ym91bmRhcnlzLmxlbmd0aDtpKyspew0KICAgICAgICAgICAgICAgIHZhciBhPWJvdW5kYXJ5c1tpXS5zbGljZSgxKTsNCiAgICAgICAgICAgICAgICB2YXIgYj1vYmouYm91bmRhcnlbYm91bmRhcnlzW2ldXTsNCiAgICAgICAgICAgICAgICAvLyBjb25zb2xlLmxvZyhhKTsNCiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChhKS5zdHlsZS5kaXNwbGF5PXNob3c7DQovLyAgICAgICAgICAgICAgICBpZihjKXsNCi8vICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCJnW2VkXFw6dG9ndG9waWNpZD0nIithKyInXSIpLnN0eWxlLmRpc3BsYXk9c2hvdzsNCi8vICAgICAgICAgICAgICAgICAgICBpZihjPT09J21pbnVzJyl7DQovLyAgICAgICAgICAgICAgICAgICAgICAgIHV0ZChiLHNob3cpDQovLyAgICAgICAgICAgICAgICAgICAgfQ0KLy8gICAgICAgICAgICAgICAgICAgIGlmIChiLmNhbGwmJmM9PT0ncGx1cycpIHsNCi8vICAgICAgICAgICAgICAgICAgICAgICAgdXRkKGIsc2hvdyx0cnVlKQ0KLy8gICAgICAgICAgICAgICAgICAgIH0NCi8vICAgICAgICAgICAgICAgIH0NCi8vICAgICAgICAgICAgICAgIGlmKGIuY2FsbCYmIWMpIHsNCi8vICAgICAgICAgICAgICAgICAgICB1dGQoYixzaG93LHRydWUpDQovLyAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgaWYoT2JqZWN0LmtleXMoYikubGVuZ3RoIT09MCl7DQogICAgICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdykNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9DQogICAgICAgIH0NCiAgICB9DQogICAgaWYoIW9jJiZvYmouY2hpbGQpIHsNCiAgICAgICAgdmFyIGNoaWxkcyA9IE9iamVjdC5rZXlzKG9iai5jaGlsZCk7DQogICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgY2hpbGRzLmxlbmd0aDsgaSsrKSB7DQogICAgICAgICAgICB2YXIgYSA9IGNoaWxkc1tpXS5zbGljZSgxKTsNCiAgICAgICAgICAgIHZhciBiID0gb2JqLmNoaWxkW2NoaWxkc1tpXV07DQogICAgICAgICAgICB2YXIgYyA9IGIudG9ndHlwZTsNCiAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGEpLnN0eWxlLmRpc3BsYXkgPSBzaG93Ow0KCQkJdmFyIHRTUGF0aCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoInBhdGhbZWRcXDp0b3N1cGVyaWQ9JyIrYSsiJ10iKTsNCiAgICAgICAgICAgIGlmKHRTUGF0aCl7DQogICAgICAgICAgICAgICAgdFNQYXRoLnN0eWxlLmRpc3BsYXkgPSBzaG93Ow0KICAgICAgICAgICAgfQ0KCQkJdmFyIG5vdGVUaXAgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCJnW2VkXFw6bm90ZXRvPSciK2ErIiddIik7DQogICAgICAgICAgICBpZihub3RlVGlwKXsNCiAgICAgICAgICAgICAgICBub3RlVGlwLnN0eWxlLmRpc3BsYXkgPSBzaG93Ow0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgaWYgKGIucmVsYWZyb20mJiFjKXsNCiAgICAgICAgICAgICAgICBpZihiLnJlbGFmcm9tLmRpc3BsYXkhPT0gc2hvdyl7DQogICAgICAgICAgICAgICAgICAgIHZhciByZWxhZnJvbXM9T2JqZWN0LmtleXMoYi5yZWxhZnJvbSk7DQogICAgICAgICAgICAgICAgICAgIHJlbGFmcm9tcy5zcGxpY2UocmVsYWZyb21zLmluZGV4T2YoJ2Rpc3BsYXknKSwxKTsNCiAgICAgICAgICAgICAgICAgICAgZm9yKHZhciBrPTA7azxyZWxhZnJvbXMubGVuZ3RoO2srKyl7DQogICAgICAgICAgICAgICAgICAgICAgICB2YXIgZD1yZWxhZnJvbXNba107DQogICAgICAgICAgICAgICAgICAgICAgICBleHRyYVJlbGFbZF0uaXNDPXRydWU7DQogICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgYi5yZWxhZnJvbS5kaXNwbGF5ID0gc2hvdzsNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9DQogICAgICAgICAgICBpZiAoYi5yZWxhdG8mJiFjKXsNCiAgICAgICAgICAgICAgICBpZihiLnJlbGF0by5kaXNwbGF5IT09IHNob3cpew0KICAgICAgICAgICAgICAgICAgICB2YXIgcmVsYXRvcz1PYmplY3Qua2V5cyhiLnJlbGF0byk7DQogICAgICAgICAgICAgICAgICAgIHJlbGF0b3Muc3BsaWNlKHJlbGF0b3MuaW5kZXhPZignZGlzcGxheScpLDEpOw0KICAgICAgICAgICAgICAgICAgICBmb3IodmFyIGs9MDtrPHJlbGF0b3MubGVuZ3RoO2srKyl7DQogICAgICAgICAgICAgICAgICAgICAgICB2YXIgZD1yZWxhdG9zW2tdOw0KICAgICAgICAgICAgICAgICAgICAgICAgZXh0cmFSZWxhW2RdLmlzQz10cnVlOw0KICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgICAgIGIucmVsYXRvLmRpc3BsYXkgPSBzaG93Ow0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgIH0NCiAgICAgICAgICAgIGlmIChjKSB7DQogICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiZ1tlZFxcOnRvZ3RvcGljaWQ9JyIgKyBhICsgIiddIikuc3R5bGUuZGlzcGxheSA9IHNob3c7DQogICAgICAgICAgICAgICAgaWYgKGMgPT09ICdtaW51cycpIHsNCiAgICAgICAgICAgICAgICAgICAgdXRkKGIsYSxzaG93KQ0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICBpZiAoKGIuY2FsbHx8Yi5ib3VuZGFyeXx8Yi5zdW1tYXJ5KSYmYz09PSdwbHVzJykgew0KICAgICAgICAgICAgICAgICAgICB1dGQoYixhLHNob3csdHJ1ZSkNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9DQogICAgICAgICAgICBpZiAoYi5jYWxsJiYhYykgew0KICAgICAgICAgICAgICAgIHV0ZChiLGEsc2hvdyx0cnVlKQ0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgaWYgKGIuc3VtbWFyeSYmIWMpIHsNCiAgICAgICAgICAgICAgICB1dGQoYixhLHNob3cpDQogICAgICAgICAgICB9DQogICAgICAgICAgICBpZiAoYi5ib3VuZGFyeSYmIWMpIHsNCiAgICAgICAgICAgICAgICB1dGQoYixhLHNob3cpDQogICAgICAgICAgICB9DQogICAgICAgIH0NCiAgICB9DQp9DQoNCmZ1bmN0aW9uIGV4dHJhUmVsYUZpbigpIHsNCiAgICB2YXIgZXh0cmFrZXlzPU9iamVjdC5rZXlzKGV4dHJhUmVsYSk7DQogICAgZm9yKHZhciBpPTA7aTxleHRyYWtleXMubGVuZ3RoO2krKyl7DQogICAgICAgIHZhciBleHRyYU9iaj1leHRyYVJlbGFbZXh0cmFrZXlzW2ldXTsNCiAgICAgICAgaWYoZXh0cmFPYmouaXNDID09PSB0cnVlKXsNCiAgICAgICAgICAgIHZhciBmc2hvdz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChleHRyYU9iai5mcm9taWQpLnN0eWxlLmRpc3BsYXkgIT09J25vbmUnPyB0cnVlOiBmYWxzZTsNCiAgICAgICAgICAgIHZhciB0c2hvdz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChleHRyYU9iai50b2lkKS5zdHlsZS5kaXNwbGF5ICE9PSdub25lJz8gdHJ1ZTogZmFsc2U7DQogICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChleHRyYU9iai5pZCkuc3R5bGUuZGlzcGxheT1mc2hvdyAmJiB0c2hvdz8gJ2Jsb2NrJzogJ25vbmUnOw0KICAgICAgICAgICAgZXh0cmFSZWxhW2V4dHJha2V5c1tpXV0uaXNDID0gZmFsc2U7DQogICAgICAgIH0NCiAgICB9DQp9'))</script>
+  </body>
+</html>
+
+       </div>
+       <div class="post-footer">
+        <div class="meta">
+         <div class="info">
+          <i class="fa fa-sun-o"></i>
+          <span class="date">2020-02-24</span>
+          <i class="fa fa-tag"></i>
+          
+          <a class="tag" href="https://xlblog.github.io/tag/pA9jVvldV/" title="JavaScript_DOM编程艺术">JavaScript_DOM编程艺术 </a>
+          
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="share">
+       <div class="evernote">
+        <a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a>
+       </div>
+       <div class="weibo">
+        <a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
+       </div>
+       <div class="twitter">
+        <a class="fa fa-twitter" href="http://twitter.com/home?status=,https://xlblog.github.io/post/javascript_dom-bian-cheng-yi-zhu-di-san-zhang-dom/,;"></a>
+       </div>
+      </div>
+      <div class="pagination">
+       <ul class="clearfix">
+
+        
+        <li class="next pagbuttons"><a class="btn" role="navigation" href="https://xlblog.github.io/post/liu-ji-fan-yi-di-yi-pian/" title=" 六级翻译第一篇">下一篇</a></li>
+        
+       </ul>
+      </div>
+        
+	<div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'WREJSfNUsjqCmUHG190wjIbF-gzGzoHsz',
+            appKey: 'Qo3w3jWesr1BXB4b0zMRJ9um'
+        })
+    </script>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <script src="https://xlblog.github.io/media/scripts/jquery.js"></script>
+  <script src="https://xlblog.github.io/media/scripts/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://xlblog.github.io/media/scripts/jquery.appear.js"></script>
+
+
+ </body>
+</html>
