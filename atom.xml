@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xlblog.github.io</id>
     <title>XLBLOG</title>
-    <updated>2020-03-01T02:10:42.694Z</updated>
+    <updated>2020-03-02T05:14:30.665Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xlblog.github.io"/>
     <link rel="self" href="https://xlblog.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://xlblog.github.io/images/avatar.png</logo>
     <icon>https://xlblog.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, XLBLOG</rights>
+    <entry>
+        <title type="html"><![CDATA[六级翻译第三篇--中国"龙"]]></title>
+        <id>https://xlblog.github.io/post/liu-ji-fan-yi-di-san-pian-zhong-guo-long/</id>
+        <link href="https://xlblog.github.io/post/liu-ji-fan-yi-di-san-pian-zhong-guo-long/">
+        </link>
+        <updated>2020-03-02T02:48:54.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[六级翻译第二篇]]></title>
         <id>https://xlblog.github.io/post/liu-ji-fan-yi-di-er-pian/</id>
